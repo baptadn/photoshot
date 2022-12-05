@@ -1,22 +1,58 @@
 {
-  "name": "themask2",
+  "name": "photoshot",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postinstall": "prisma generate",
+    "vercel-build": "prisma generate && prisma migrate deploy && next build"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.223.0",
+    "@aws-sdk/s3-request-presigner": "^3.223.0",
+    "@chakra-ui/react": "^2.4.2",
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@next-auth/prisma-adapter": "^1.0.5",
+    "@next/font": "^13.0.6",
+    "@prisma/client": "^4.7.1",
+    "@stripe/react-stripe-js": "^1.16.0",
+    "@stripe/stripe-js": "^1.46.0",
     "@types/node": "18.11.10",
     "@types/react": "18.0.26",
     "@types/react-dom": "18.0.9",
+    "@types/uniqid": "^5.3.2",
+    "@vercel/analytics": "^0.1.5",
+    "axios": "^1.2.0",
+    "date-fns": "^2.29.3",
     "eslint": "8.29.0",
     "eslint-config-next": "13.0.6",
+    "framer-motion": "^7.6.19",
+    "jszip": "^3.10.1",
     "next": "13.0.6",
+    "next-auth": "^4.18.0",
+    "next-s3-upload": "^0.2.8",
+    "nodemailer": "^6.8.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "typescript": "4.9.3"
+    "react-dropzone": "^14.2.3",
+    "react-icons": "^4.7.1",
+    "react-medium-image-zoom": "^5.1.2",
+    "react-query": "^3.39.2",
+    "sharp": "^0.31.2",
+    "smartcrop-sharp": "^2.0.6",
+    "stripe": "^11.1.0",
+    "superjson": "^1.12.0",
+    "typescript": "4.9.3",
+    "uniqid": "^5.4.0",
+    "url-slug": "^3.0.4",
+    "windups": "^1.2.1"
+  },
+  "devDependencies": {
+    "@types/sharp": "^0.31.0",
+    "prisma": "^4.7.1"
   }
 }

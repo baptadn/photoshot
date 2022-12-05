@@ -1,0 +1,34 @@
+<svg width="152" height="148" viewBox="0 0 152 148" fill="none" xmlns="http://www.w3.org/2000/svg">
+ <style>
+    .selection-effect {
+        stroke-dasharray: 10;
+        animation-duration: 20s;
+        animation-name: selectionEffect;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+    }
+
+    @keyframes selectionEffect {
+        from {
+            stroke-opacity: 1;
+        }
+
+        to {
+            stroke-opacity: 1;
+            stroke-dashoffset: 800;
+        }
+    }
+</style>
+<g clip-path="url(#clip0)">
+<path d="M43.5725 74.0949L52.6574 78.0712L78.8383 63.7898L63.0476 82.2107L85.6809 92.5158C86.068 92.6853 86.4902 92.7592 86.9119 92.7311C87.3335 92.7029 87.7422 92.5737 88.1033 92.3543C88.4645 92.1349 88.7674 91.8318 88.9867 91.4706C89.2059 91.1093 89.3349 90.7006 89.3628 90.279L91.9946 50.8057C92.0239 50.3488 91.9337 49.8921 91.733 49.4807C91.5322 49.0692 91.2278 48.7171 90.8496 48.459C90.4715 48.2009 90.0326 48.0457 89.5763 48.0086C89.1199 47.9716 88.6618 48.054 88.2469 48.2478L43.5067 69.3002C43.0503 69.5167 42.6657 69.8598 42.3987 70.2885C42.1316 70.7172 41.9933 71.2137 42.0002 71.7187C42.0072 72.2238 42.159 72.7162 42.4378 73.1374C42.7165 73.5587 43.1103 73.891 43.5725 74.0949V74.0949ZM57.7841 98L70.3535 91.9053L57.7841 86.0422V98Z" fill="black"/>
+<line class="selection-effect" x1="-5.70711" y1="150.293" x2="151.293" y2="-6.70711" stroke="black" stroke-width="2"/>
+<line class="selection-effect" x1="12.2929" y1="162.293" x2="169.293" y2="5.29289" stroke="black" stroke-width="2"/>
+<line class="selection-effect" x1="39.2929" y1="181.293" x2="196.293" y2="24.2929" stroke="black" stroke-width="2"/>
+<line class="selection-effect" x1="12.2929" y1="162.293" x2="169.293" y2="5.29289" stroke="black" stroke-width="2"/>
+</g>
+<defs>
+<clipPath id="clip0">
+<rect width="152" height="148" fill="white"/>
+</clipPath>
+</defs>
+</svg>

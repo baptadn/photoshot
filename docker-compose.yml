@@ -1,0 +1,24 @@
+version: "3"
+
+services:
+  postgres:
+    image: postgres:14
+    restart: always
+    environment:
+      POSTGRES_USER: photoshot
+      POSTGRES_PASSWORD: photoshot
+      POSTGRES_DB: photoshot
+    ports:
+      - 5432:5432
+    volumes:
+      - postgresql:/var/lib/postgresql
+      - postgresql_data:/var/lib/postgresql/data
+
+  maildev:
+    image: djfarrelly/maildev
+    ports:
+      - "1080:80"
+      - "25:25"
+volumes:
+  postgresql:
+  postgresql_data:

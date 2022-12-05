@@ -1,0 +1,25 @@
+<svg width="152" height="148" viewBox="0 0 152 148" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <style>
+        .dash-slide {
+            animation-name: dash;
+            stroke-dasharray: 10;
+            animation-duration: 4s;
+            animation-direction: reverse;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+        }
+
+        @keyframes dash {
+            100% {
+                stroke-dashoffset: 100;
+            }
+        }
+    </style>
+    <rect width="152" height="148" />
+    <path d="M75.7658 7.23344L122.894 26.4212L142.651 73.3136L123.463 120.442L76.5707 140.199L29.4425 121.011L9.68563 74.1185L28.8734 26.9903L75.7658 7.23344Z" fill="black"/>
+    <rect class="dash-slide" x="8.32567" y="7.16944" width="136.305" height="132.904" transform="rotate(-0.209162 8.32567 7.16944)" stroke="black" stroke-width="2"/>
+    <rect x="1.12912" y="1.52583" width="13" height="13" transform="rotate(-0.504153 1.12912 1.52583)" fill="white" stroke="black" stroke-width="2"/>
+    <rect x="136.64" y="2.48579" width="13" height="13" transform="rotate(-0.504153 136.64 2.48579)" fill="white" stroke="black" stroke-width="2"/>
+    <rect x="137.558" y="133.181" width="13" height="13" transform="rotate(-0.504153 137.558 133.181)" fill="white" stroke="black" stroke-width="2"/>
+    <rect x="1.22336" y="131.82" width="13" height="13" transform="rotate(-0.504153 1.22336 131.82)" fill="white" stroke="black" stroke-width="2"/>
+</svg>
