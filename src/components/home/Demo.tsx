@@ -15,6 +15,7 @@ const examples = [
   { label: "Painting of Tom by Van Gogh", imageUrl: "/shots/vangogh.png" },
   { label: "Portrait of Tom as a warrior", imageUrl: "/shots/warrior.png" },
   { label: "Painting of Tom by Andy Warhol", imageUrl: "/shots/wharol.png" },
+  { label: "Portrait of Tom as Santa Claus", imageUrl: "/shots/santa.jpg" },
   {
     label: "painting of Tom by Gustav Klimt",
     imageUrl: "/shots/klimt.png",
