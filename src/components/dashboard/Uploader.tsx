@@ -1,3 +1,4 @@
+import { resizeImage } from "@/core/utils/upload";
 import {
   Box,
   Button,
@@ -12,7 +13,6 @@ import {
   Select,
   SimpleGrid,
   Spinner,
-  Text,
   useToast,
   VStack,
 } from "@chakra-ui/react";
@@ -42,8 +42,8 @@ const Uploader = ({ handleOnAdd }: { handleOnAdd: () => void }) => {
       "image/png": [".png"],
       "image/jpeg": [".jpeg", ".jpg"],
     },
-    maxFiles: 8,
-    maxSize: 2000000, // 2mo
+    maxFiles: 15,
+    maxSize: 10000000, // 10mo
     onDropRejected: (events) => {
       setErrorMessages([]);
       const messages: { [key: string]: string } = {};
@@ -74,7 +74,7 @@ const Uploader = ({ handleOnAdd }: { handleOnAdd: () => void }) => {
     setUploadState("uploading");
 
     for (let index = 0; index < filesToUpload.length; index++) {
-      const file = filesToUpload[index];
+      const file = await resizeImage(filesToUpload[index]);
       const { url } = await uploadToS3(file);
 
       setUrls((current) => [...current, url]);
@@ -139,10 +139,10 @@ const Uploader = ({ handleOnAdd }: { handleOnAdd: () => void }) => {
             </Box>
             <Box fontWeight="bold" fontSize="lg">
               <Highlight
-                query="up to 8 selfies"
+                query="up to 15 selfies"
                 styles={{ bg: "brand.500", px: 1 }}
               >
-                Add up to 8 selfies of you.
+                Add up to 15 selfies of you.
               </Highlight>
             </Box>
             <Box>

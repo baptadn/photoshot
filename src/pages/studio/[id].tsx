@@ -99,7 +99,9 @@ const StudioPage = ({ project }: IStudioPageProps) => {
             shadow="lg"
             mr={2}
             type="text"
-            placeholder={`painting of ${project.instanceName} ${project.instanceClass} by Andy Warhol`}
+            placeholder={`painting of ${
+              project.instanceName
+            } ${getRefinedInstanceClass(project.instanceClass)} by Andy Warhol`}
             value={prompt}
             onChange={(e) => setPrompt(e.currentTarget.value)}
           />

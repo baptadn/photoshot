@@ -146,7 +146,7 @@ const ProjectCard = ({
             <Spinner size="xl" speed="2s" />
             <Text textAlign="center" maxW="20rem">
               The studio is creating{" "}
-              <b>the custom model based on your uploded photos</b>. This
+              <b>the custom model based on your uploaded photos</b>. This
               operation usually takes ~20min.
             </Text>
           </VStack>

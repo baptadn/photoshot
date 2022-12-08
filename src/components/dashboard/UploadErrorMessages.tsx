@@ -12,8 +12,8 @@ const UploadErrorMessages = ({
       {messages?.map((errorMessage) => (
         <Box key={errorMessage}>
           {errorMessage
-            .replace("2000000 bytes", "2mo")
-            .replace("many files", "many files (max 8)")}
+            .replace("10000000 bytes", "10mo")
+            .replace("many files", "many files (max 15)")}
         </Box>
       ))}
     </Box>
