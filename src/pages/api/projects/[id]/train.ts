@@ -29,7 +29,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       input: {
         instance_prompt: `a photo of a ${project.instanceName} ${instanceClass}`,
         class_prompt: `a photo of a ${instanceClass}`,
-        instance_data: `https://${process.env.S3_UPLOAD_BUCKET}.s3.amazonaws.com/${project.name}.zip`,
+        instance_data: `https://${process.env.S3_UPLOAD_BUCKET}.s3.amazonaws.com/${project.id}.zip`,
         max_train_steps: 800,
         num_class_images: 50,
         learning_rate: 1e-6,

@@ -37,7 +37,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     await s3Client.send(
       new PutObjectCommand({
         Bucket: process.env.S3_UPLOAD_BUCKET!,
-        Key: `${project.name}.zip`,
+        Key: `${project.id}.zip`,
         Body: buffer,
       })
     );

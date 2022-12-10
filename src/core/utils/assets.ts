@@ -36,7 +36,7 @@ export const createZipFolder = async (urls: string[], project: Project) => {
   });
 
   const buffers = await Promise.all(buffersPromises);
-  const folder = zip.folder(project.name);
+  const folder = zip.folder(project.id);
 
   buffers.forEach((buffer, i) => {
     const filename = urls[i].split("/").pop();
