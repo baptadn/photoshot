@@ -249,6 +249,7 @@ const Uploader = ({ handleOnAdd }: { handleOnAdd: () => void }) => {
             >
               <option value="man">Man</option>
               <option value="woman">Woman</option>
+              <option value="child">Child</option>
               <option value="dog">Dog</option>
               <option value="cat">Cat</option>
               <option value="couple">Couple</option>

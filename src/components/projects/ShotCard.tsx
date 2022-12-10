@@ -2,7 +2,6 @@ import {
   Box,
   Button,
   Center,
-  Divider,
   Flex,
   HStack,
   Link,
@@ -14,7 +13,7 @@ import { Shot } from "@prisma/client";
 import axios from "axios";
 import { formatRelative } from "date-fns";
 import NextImage from "next/image";
-import { IoMdClipboard } from "react-icons/io";
+import { memo } from "react";
 import Zoom from "react-medium-image-zoom";
 import { useQuery } from "react-query";
 
@@ -84,7 +83,7 @@ const ShotCard = ({
           ml={4}
         >
           <Box>
-            <Text textTransform="capitalize" fontWeight="600" fontSize="lg">
+            <Text fontWeight="600" fontSize="lg">
               {shot.prompt}
             </Text>
             <Text fontSize="sm">
@@ -124,4 +123,4 @@ const ShotCard = ({
   );
 };
 
-export default ShotCard;
+export default memo(ShotCard);

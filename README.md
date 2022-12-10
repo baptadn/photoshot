@@ -3,8 +3,7 @@
 An open-source AI avatar generator web app
 
 [![Photoshot](https://photoshot.app/og-cover.jpg)
-](https://user-images.githubusercontent.com/1102595/206658000-d349ef06-e4f2-4626-9deb-6c8a246f7553.mp4
-)
+](https://user-images.githubusercontent.com/1102595/206658000-d349ef06-e4f2-4626-9deb-6c8a246f7553.mp4)
 
 Try it out at [photoshot.app](https://photoshot.app)
 
@@ -17,6 +16,18 @@ Try it out at [photoshot.app](https://photoshot.app)
 - 👩‍🎨 [Stable Diffusion](https://replicate.com/stability-ai/stable-diffusion) an open-source text-to-image generation model
 
 ## Getting Started
+
+Install dependencies:
+
+```bash
+yarn install
+```
+
+Setup environment variables:
+
+```bash
+cp .env.example .env.local
+```
 
 First, run the development server:
 

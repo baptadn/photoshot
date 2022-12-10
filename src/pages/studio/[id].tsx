@@ -10,13 +10,14 @@ import {
   Icon,
   Input,
   Text,
+  Textarea,
   VStack,
 } from "@chakra-ui/react";
 import { Project, Shot } from "@prisma/client";
 import axios from "axios";
 import { GetServerSidePropsContext } from "next";
 import { getSession } from "next-auth/react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useMutation } from "react-query";
 import superjson from "superjson";
 import { FaMagic } from "react-icons/fa";
@@ -35,15 +36,15 @@ interface IStudioPageProps {
 }
 
 const StudioPage = ({ project }: IStudioPageProps) => {
-  const [prompt, setPrompt] = useState("");
   const [shots, setShots] = useState(project.shots);
   const [shotCredits, setShotCredits] = useState(project.credits);
+  const promptInputRef = useRef<HTMLTextAreaElement>(null);
 
   const { mutate: createPrediction, isLoading } = useMutation(
     "create-prediction",
     (project: Project) =>
       axios.post<{ shot: Shot }>(`/api/projects/${project.id}/predictions`, {
-        prompt,
+        prompt: promptInputRef.current!.value,
       }),
     {
       onSuccess: (response) => {
@@ -51,7 +52,7 @@ const StudioPage = ({ project }: IStudioPageProps) => {
 
         setShots([shot, ...shots]);
         setShotCredits(shotCredits - 1);
-        setPrompt("");
+        promptInputRef.current!.value = "";
       },
     }
   );
@@ -86,24 +87,24 @@ const StudioPage = ({ project }: IStudioPageProps) => {
           as="form"
           onSubmit={(e) => {
             e.preventDefault();
-            if (prompt) {
+            if (promptInputRef.current!.value) {
               createPrediction(project);
             }
           }}
           width="100%"
         >
-          <Input
+          <Textarea
+            ref={promptInputRef}
             backgroundColor="white"
             isRequired
             size="lg"
             shadow="lg"
+            focusBorderColor="gray.400"
+            _focus={{ shadow: "md" }}
             mr={2}
-            type="text"
             placeholder={`painting of ${
               project.instanceName
             } ${getRefinedInstanceClass(project.instanceClass)} by Andy Warhol`}
-            value={prompt}
-            onChange={(e) => setPrompt(e.currentTarget.value)}
           />
           <Button
             type="submit"
