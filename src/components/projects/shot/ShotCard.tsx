@@ -12,26 +12,20 @@ import {
 import { Shot } from "@prisma/client";
 import axios from "axios";
 import { formatRelative } from "date-fns";
-import NextImage from "next/image";
+import { useRouter } from "next/router";
 import { memo } from "react";
-import Zoom from "react-medium-image-zoom";
 import { useQuery } from "react-query";
+import ShotImage from "./ShotImage";
 
-const ShotCard = ({
-  shot: initialShot,
-  projectId,
-}: {
-  shot: Shot;
-  projectId: string;
-}) => {
+const ShotCard = ({ shot: initialShot }: { shot: Shot }) => {
   const { onCopy, hasCopied } = useClipboard(initialShot.prompt);
-
+  const { query } = useRouter();
   const { data } = useQuery(
     `shot-${initialShot.id}`,
     () =>
       axios
         .get<{ shot: Shot }>(
-          `/api/projects/${projectId}/predictions/${initialShot.id}`
+          `/api/projects/${query.id}/predictions/${initialShot.id}`
         )
         .then((res) => res.data),
     {
@@ -48,22 +42,7 @@ const ShotCard = ({
     <Box width="100%" p={2}>
       <Flex flex="2">
         {shot.outputUrl ? (
-          <Box
-            height="100px"
-            width="100px"
-            backgroundColor="gray.100"
-            borderRadius="xl"
-            overflow="hidden"
-          >
-            <Zoom>
-              <NextImage
-                alt={shot.prompt}
-                src={shot.outputUrl}
-                width="512"
-                height="512"
-              />
-            </Zoom>
-          </Box>
+          <ShotImage shot={shot} />
         ) : (
           <Box>
             <Center

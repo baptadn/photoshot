@@ -1,5 +1,5 @@
 import PageContainer from "@/components/layout/PageContainer";
-import ShotCard from "@/components/projects/ShotCard";
+import ShotCard from "@/components/projects/shot/ShotCard";
 import db from "@/core/db";
 import {
   Badge,
@@ -8,7 +8,6 @@ import {
   Divider,
   Flex,
   Icon,
-  Input,
   Text,
   Textarea,
   VStack,
@@ -18,7 +17,7 @@ import axios from "axios";
 import { GetServerSidePropsContext } from "next";
 import { getSession } from "next-auth/react";
 import { useRef, useState } from "react";
-import { useMutation } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import superjson from "superjson";
 import { FaMagic } from "react-icons/fa";
 import { formatRelative } from "date-fns";
@@ -32,11 +31,18 @@ export type ProjectWithShots = Project & {
 };
 
 interface IStudioPageProps {
-  project: ProjectWithShots;
+  project: ProjectWithShots & { _count: { shots: number } };
 }
+
+const PER_PAGE = 10;
 
 const StudioPage = ({ project }: IStudioPageProps) => {
   const [shots, setShots] = useState(project.shots);
+  const [skip, setSkip] = useState(PER_PAGE);
+  const [hasMoreResult, setHasMoreResult] = useState(
+    project.shots.length < project._count.shots
+  );
+
   const [shotCredits, setShotCredits] = useState(project.credits);
   const promptInputRef = useRef<HTMLTextAreaElement>(null);
 
@@ -52,7 +58,29 @@ const StudioPage = ({ project }: IStudioPageProps) => {
 
         setShots([shot, ...shots]);
         setShotCredits(shotCredits - 1);
+        setSkip(skip + 1);
+
         promptInputRef.current!.value = "";
+      },
+    }
+  );
+
+  const { isLoading: isLoadingMore, refetch } = useQuery(
+    `shots-${PER_PAGE}-${skip}`,
+    () =>
+      axios.get<{ shots: Shot[]; shotsCount: number }>(
+        `/api/projects/${project.id}/shots?take=${PER_PAGE}&skip=${skip}`
+      ),
+    {
+      enabled: false,
+      onSuccess: (response) => {
+        const { data } = response;
+        setHasMoreResult(shots.length + data.shots.length < data.shotsCount);
+
+        if (data.shots.length) {
+          setShots([...shots, ...data.shots]);
+          setSkip(skip + PER_PAGE);
+        }
       },
     }
   );
@@ -133,8 +161,19 @@ const StudioPage = ({ project }: IStudioPageProps) => {
         ) : (
           <VStack spacing={4} divider={<Divider />} alignItems="flex-start">
             {shots.map((shot: Shot) => (
-              <ShotCard key={shot.id} projectId={project.id} shot={shot} />
+              <ShotCard key={shot.id} shot={shot} />
             ))}
+            {hasMoreResult && (
+              <Button
+                isLoading={isLoadingMore}
+                variant="brand"
+                onClick={() => {
+                  refetch();
+                }}
+              >
+                Load more
+              </Button>
+            )}
           </VStack>
         )}
       </Box>
@@ -157,7 +196,12 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   const project = await db.project.findFirstOrThrow({
     where: { id: projectId, userId: session.userId, modelStatus: "succeeded" },
-    include: { shots: { orderBy: { createdAt: "desc" } } },
+    include: {
+      _count: {
+        select: { shots: true },
+      },
+      shots: { orderBy: { createdAt: "desc" }, take: PER_PAGE, skip: 0 },
+    },
     orderBy: { createdAt: "desc" },
   });
 
