@@ -21,7 +21,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       modelStatus = response?.data?.status || modelStatus;
     }
 
-    res.json({ project, modelStatus });
+    return res.json({ project, modelStatus });
   }
 
   res.status(401).json({ message: "Not authenticated" });
