@@ -4,12 +4,11 @@ import JSZip from "jszip";
 import sharp from "sharp";
 import smartcrop from "smartcrop-sharp";
 
-const zip = new JSZip();
-
 const WIDTH = 512;
 const HEIGHT = 512;
 
 export const createZipFolder = async (urls: string[], project: Project) => {
+  const zip = new JSZip();
   const requests = [];
 
   for (let i = 0; i < urls.length; i++) {
