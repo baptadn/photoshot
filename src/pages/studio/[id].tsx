@@ -10,6 +10,7 @@ import {
   Icon,
   Text,
   Textarea,
+  Link as ChakraLink,
   VStack,
 } from "@chakra-ui/react";
 import { Project, Shot } from "@prisma/client";
@@ -152,7 +153,14 @@ const StudioPage = ({ project }: IStudioPageProps) => {
             {project.instanceName}{" "}
             {getRefinedInstanceClass(project.instanceClass)}
           </b>{" "}
-          as the subject in your prompt.
+          as the subject in your prompt. Need prompt inspiration? Check{" "}
+          <ChakraLink
+            textDecoration="underline"
+            isExternal
+            href="https://lexica.art/?q=portrait+of+jedi"
+          >
+            lexica.art
+          </ChakraLink>
         </Text>
         <Divider mt={10} mb={4} />
         {shots.length === 0 ? (
