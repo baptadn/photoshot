@@ -1,4 +1,4 @@
-import { Divider, Flex, Image, SimpleGrid, Text } from "@chakra-ui/react";
+import { Flex, Image, SimpleGrid, Text } from "@chakra-ui/react";
 import React from "react";
 
 interface ItemProps {

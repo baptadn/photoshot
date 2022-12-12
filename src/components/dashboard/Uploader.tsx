@@ -10,9 +10,11 @@ import {
   Icon,
   Image,
   Input,
+  List,
   Select,
   SimpleGrid,
   Spinner,
+  Text,
   useToast,
   VStack,
 } from "@chakra-ui/react";
@@ -23,6 +25,7 @@ import { useDropzone } from "react-dropzone";
 import { MdCheckCircle, MdCloud } from "react-icons/md";
 import { useMutation } from "react-query";
 import AvatarsPlaceholder from "../home/AvatarsPlaceholder";
+import { CheckedListItem } from "../home/Pricing";
 import UploadErrorMessages from "./UploadErrorMessages";
 
 type TUploadState = "not_uploaded" | "uploading" | "uploaded";
@@ -139,16 +142,33 @@ const Uploader = ({ handleOnAdd }: { handleOnAdd: () => void }) => {
             </Box>
             <Box fontWeight="bold" fontSize="lg">
               <Highlight
-                query="up to 15 selfies"
+                query="10-20 pictures"
                 styles={{ bg: "brand.500", px: 1 }}
               >
-                Add up to 15 selfies of you.
+                Upload 10-20 pictures of you
               </Highlight>
             </Box>
-            <Box>
-              Better with different angles : face and right/left profiles
+            <Box maxWidth="container.sm">
+              <Text mt={4}>
+                To get the best results, we suggest uploading 3 full body or
+                entire object photos, 5 medium shots of the chest and up, and 10
+                close-up photos and:
+              </Text>
             </Box>
-
+            <Box>
+              <List mt={4} textAlign="left">
+                <CheckedListItem>
+                  Mix it up - change body pose, background, and lighting in each
+                  photo
+                </CheckedListItem>
+                <CheckedListItem>
+                  Capture a range of expressions
+                </CheckedListItem>
+                <CheckedListItem>
+                  {`Show the subject's eyes looking in different directions`}
+                </CheckedListItem>
+              </List>
+            </Box>
             {errorMessages?.length !== 0 && (
               <UploadErrorMessages messages={errorMessages} />
             )}
@@ -237,8 +257,10 @@ const Uploader = ({ handleOnAdd }: { handleOnAdd: () => void }) => {
             />
             <FormHelperText color="blackAlpha.600">
               This name will be use to name your person in your prompt:{" "}
-              <b>{`Painting of ${instanceName || "Alice"} by Andy Warhol`}</b>.
-              {` Don't use spaces or special characters.`}
+              <b>{`Painting of ${
+                instanceName || "Alice"
+              } ${instanceClass} by Andy Warhol`}</b>
+              .
             </FormHelperText>
           </FormControl>
           <FormControl>

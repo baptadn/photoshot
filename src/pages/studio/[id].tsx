@@ -130,9 +130,11 @@ const StudioPage = ({ project }: IStudioPageProps) => {
             focusBorderColor="gray.400"
             _focus={{ shadow: "md" }}
             mr={2}
-            placeholder={`painting of ${
+            placeholder={`a portrait of a ${
               project.instanceName
-            } ${getRefinedInstanceClass(project.instanceClass)} by Andy Warhol`}
+            } ${getRefinedInstanceClass(
+              project.instanceClass
+            )} as an astronaut, highly-detailed, trending on artstation`}
           />
           <Button
             type="submit"
@@ -150,8 +152,7 @@ const StudioPage = ({ project }: IStudioPageProps) => {
             {project.instanceName}{" "}
             {getRefinedInstanceClass(project.instanceClass)}
           </b>{" "}
-          as the subject in your prompt. First prompt can be slow, but following
-          prompts will be faster.
+          as the subject in your prompt.
         </Text>
         <Divider mt={10} mb={4} />
         {shots.length === 0 ? (

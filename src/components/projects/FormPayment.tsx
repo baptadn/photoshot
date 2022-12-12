@@ -6,7 +6,6 @@ import {
   Button,
   List,
   Spinner,
-  Tag,
   Text,
   VStack,
 } from "@chakra-ui/react";
@@ -16,7 +15,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
-import { PriceItem } from "../home/Pricing";
+import { CheckedListItem } from "../home/Pricing";
 
 const FormPayment = ({
   project,
@@ -72,17 +71,17 @@ const FormPayment = ({
             Your Studio is ready to be trained!
           </Box>
           <List textAlign="left" spacing={1}>
-            <PriceItem>
+            <CheckedListItem>
               <b>1</b> Studio with a <b>custom trained model</b>
-            </PriceItem>
-            <PriceItem>
+            </CheckedListItem>
+            <CheckedListItem>
               <b>{process.env.NEXT_PUBLIC_STUDIO_SHOT_AMOUNT}</b> images
               generation (512x512 resolution)
-            </PriceItem>
-            <PriceItem>
+            </CheckedListItem>
+            <CheckedListItem>
               Your Studio will be deleted 24 hours after your credits are
               exhausted
-            </PriceItem>
+            </CheckedListItem>
           </List>
           <Button
             as={Link}

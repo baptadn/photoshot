@@ -11,7 +11,11 @@ import {
 import { HiBadgeCheck } from "react-icons/hi";
 import { formatStudioPrice } from "@/core/utils/prices";
 
-export const PriceItem = ({ children }: { children: React.ReactNode }) => (
+export const CheckedListItem = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => (
   <ListItem>
     <ListIcon fontSize="xl" as={HiBadgeCheck} /> {children}
   </ListItem>
@@ -66,15 +70,15 @@ const Pricing = () => {
         </Box>
 
         <List mt={2} mb={4} spacing={1}>
-          <PriceItem>
+          <CheckedListItem>
             <b>1</b> Studio with a <b>custom trained model</b>
-          </PriceItem>
-          <PriceItem>
+          </CheckedListItem>
+          <CheckedListItem>
             <b>{process.env.NEXT_PUBLIC_STUDIO_SHOT_AMOUNT}</b> images
             generation
-          </PriceItem>
-          <PriceItem>Craft your own prompt</PriceItem>
-          <PriceItem>Sponsorship development 🖤</PriceItem>
+          </CheckedListItem>
+          <CheckedListItem>Craft your own prompt</CheckedListItem>
+          <CheckedListItem>Sponsorship development 🖤</CheckedListItem>
         </List>
       </Box>
     </SimpleGrid>
