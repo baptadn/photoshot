@@ -45,7 +45,7 @@ const Uploader = ({ handleOnAdd }: { handleOnAdd: () => void }) => {
       "image/png": [".png"],
       "image/jpeg": [".jpeg", ".jpg"],
     },
-    maxFiles: 15,
+    maxFiles: 25,
     maxSize: 10000000, // 10mo
     onDropRejected: (events) => {
       setErrorMessages([]);
