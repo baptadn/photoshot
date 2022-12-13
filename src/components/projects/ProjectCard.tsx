@@ -6,6 +6,7 @@ import {
   Box,
   Button,
   Center,
+  Flex,
   Spinner,
   Text,
   VStack,
@@ -18,6 +19,7 @@ import { HiArrowRight } from "react-icons/hi";
 import { IoIosFlash } from "react-icons/io";
 import { useMutation } from "react-query";
 import FormPayment from "./FormPayment";
+import ProjectDeleteButton from "./ProjectDeleteButton";
 
 const ProjectCard = ({
   project,
@@ -53,7 +55,6 @@ const ProjectCard = ({
 
   return (
     <Box
-      overflow="hidden"
       position="relative"
       backgroundColor="white"
       width="100%"
@@ -64,17 +65,25 @@ const ProjectCard = ({
       shadow="lg"
     >
       <VStack spacing={4} alignItems="flex-start">
-        <Box>
-          <Text fontSize="2xl" fontWeight="semibold">
-            Studio <b>{project.instanceName}</b>{" "}
-            {isReady && (
-              <Badge colorScheme="teal">{project.credits} shots left</Badge>
-            )}
-          </Text>
-          <Text textTransform="capitalize" fontSize="sm">
-            {formatRelative(new Date(project.createdAt), new Date())}
-          </Text>
-        </Box>
+        <Flex width="100%">
+          <Box flex="1">
+            <Text fontSize="2xl" fontWeight="semibold">
+              Studio <b>{project.instanceName}</b>{" "}
+              {isReady && (
+                <Badge colorScheme="teal">{project.credits} shots left</Badge>
+              )}
+            </Text>
+            <Text textTransform="capitalize" fontSize="sm">
+              {formatRelative(new Date(project.createdAt), new Date())}
+            </Text>
+          </Box>
+          <ProjectDeleteButton
+            handleRemove={() => {
+              handleRefreshProjects();
+            }}
+            projectId={project.id}
+          />
+        </Flex>
 
         {isWaitingPayment && (
           <FormPayment
@@ -87,7 +96,7 @@ const ProjectCard = ({
 
         {isWaitingTraining && (
           <>
-            <VStack width="100%" spacing={4}>
+            <VStack overflow="hidden" width="100%" spacing={4}>
               <Box fontWeight="bold" fontSize="xl">
                 Your Studio is ready to be trained!
               </Box>
@@ -111,7 +120,7 @@ const ProjectCard = ({
         )}
 
         {isReady && (
-          <Center width="100%" marginX="auto">
+          <Center overflow="hidden" width="100%" marginX="auto">
             <VStack spacing={7}>
               {!project.shots ? (
                 <Box fontSize="lg">
