@@ -12,6 +12,7 @@ import {
   Textarea,
   Link as ChakraLink,
   VStack,
+  SimpleGrid,
 } from "@chakra-ui/react";
 import { Project, Shot } from "@prisma/client";
 import axios from "axios";
@@ -99,7 +100,12 @@ const StudioPage = ({ project }: IStudioPageProps) => {
           Back to Dashboard
         </Button>
       </Box>
-      <Box borderRadius="xl" p={{ base: 5, md: 10 }} backgroundColor="white">
+      <Box
+        borderRadius="xl"
+        p={{ base: 5, md: 7 }}
+        mb={10}
+        backgroundColor="white"
+      >
         <Text fontSize="2xl" fontWeight="semibold">
           Studio <b>{project.instanceName}</b>{" "}
           <Badge colorScheme="teal">{shotCredits} shots left</Badge>
@@ -110,7 +116,7 @@ const StudioPage = ({ project }: IStudioPageProps) => {
 
         <Flex
           flexDirection={{ base: "column", sm: "row" }}
-          gap={2}
+          gap={{ base: 4, md: 2 }}
           mt={10}
           mb={4}
           as="form"
@@ -162,17 +168,25 @@ const StudioPage = ({ project }: IStudioPageProps) => {
             lexica.art
           </ChakraLink>
         </Text>
-        <Divider mt={10} mb={4} />
-        {shots.length === 0 ? (
-          <Box textAlign="center" fontSize="lg">
-            {`You don't have any prompt yet. It's time to be creative!`}
-          </Box>
-        ) : (
-          <VStack spacing={4} divider={<Divider />} alignItems="flex-start">
+      </Box>
+
+      {shots.length === 0 ? (
+        <Box textAlign="center" fontSize="lg">
+          {`You don't have any prompt yet. It's time to be creative!`}
+        </Box>
+      ) : (
+        <>
+          <SimpleGrid
+            columns={{ base: 1, sm: 2, md: 3 }}
+            spacing={10}
+            alignItems="flex-start"
+          >
             {shots.map((shot: Shot) => (
               <ShotCard key={shot.id} shot={shot} />
             ))}
-            {hasMoreResult && (
+          </SimpleGrid>
+          {hasMoreResult && (
+            <Box mt={4} textAlign="center" width="100%">
               <Button
                 isLoading={isLoadingMore}
                 variant="brand"
@@ -182,10 +196,10 @@ const StudioPage = ({ project }: IStudioPageProps) => {
               >
                 Load more
               </Button>
-            )}
-          </VStack>
-        )}
-      </Box>
+            </Box>
+          )}
+        </>
+      )}
     </PageContainer>
   );
 };

@@ -1,7 +1,17 @@
-import { Button, Flex, HStack, Icon, Text } from "@chakra-ui/react";
+import {
+  Button,
+  Flex,
+  HStack,
+  Icon,
+  IconButton,
+  Popover,
+  Text,
+  Tooltip,
+} from "@chakra-ui/react";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import React from "react";
+import { HiLogout } from "react-icons/hi";
 import { IoIosFlash } from "react-icons/io";
 
 const Header = () => {
@@ -29,23 +39,36 @@ const Header = () => {
             _groupHover={{ color: "brand.500" }}
             as={IoIosFlash}
           />
-          <Text>Photoshot.</Text>
+          <Text display={{ base: "none", sm: "inherit" }}>Photoshot.</Text>
         </Flex>
         {session ? (
           <HStack>
             <Button href="/dashboard" as={Link} variant="brand" size="sm">
               Dashboard
             </Button>
-            <Button
-              variant="link"
-              size="sm"
-              color="blackAlpha.500"
-              onClick={() => {
-                signOut({ callbackUrl: "/" });
-              }}
-            >
-              Log out
-            </Button>
+            <Tooltip hasArrow label="Public gallery">
+              <Button
+                href={`/gallery/${session.userId}`}
+                as={Link}
+                variant="outline"
+                size="sm"
+                _hover={{ bg: "brand.500" }}
+              >
+                My Gallery
+              </Button>
+            </Tooltip>
+            <Tooltip hasArrow label="Logout">
+              <IconButton
+                _hover={{ bg: "brand.500" }}
+                aria-label="logout"
+                icon={<HiLogout />}
+                size="sm"
+                variant="ghost"
+                onClick={() => {
+                  signOut({ callbackUrl: "/" });
+                }}
+              />
+            </Tooltip>
           </HStack>
         ) : (
           <Button href="/login" as={Link} variant="brand" size="sm">

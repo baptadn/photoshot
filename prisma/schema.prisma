@@ -88,4 +88,5 @@ model Shot {
   Project     Project? @relation(fields: [projectId], references: [id])
   projectId   String?
   outputUrl   String?
+  bookmarked  Boolean? @default(false)
 }

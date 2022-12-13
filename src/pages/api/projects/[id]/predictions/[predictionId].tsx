@@ -9,16 +9,24 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const session = await getSession({ req });
 
-  if (session?.user) {
-    const shot = await db.shot.findFirstOrThrow({
-      where: { projectId: projectId, id: predictionId },
-    });
+  if (!session?.user) {
+    return res.status(401).json({ message: "Not authenticated" });
+  }
 
+  const project = await db.project.findFirstOrThrow({
+    where: { id: projectId, userId: session.userId },
+  });
+
+  let shot = await db.shot.findFirstOrThrow({
+    where: { projectId: project.id, id: predictionId },
+  });
+
+  if (req.method === "GET") {
     const { data: prediction } = await replicateClient.get(
       `https://api.replicate.com/v1/predictions/${shot.replicateId}`
     );
 
-    await db.shot.update({
+    shot = await db.shot.update({
       where: { id: shot.id },
       data: {
         status: prediction.status,
@@ -27,9 +35,20 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     });
 
     return res.json({ shot });
+  } else if (req.method === "PATCH") {
+    const { bookmarked } = req.body;
+
+    shot = await db.shot.update({
+      where: { id: shot.id },
+      data: {
+        bookmarked: bookmarked || false,
+      },
+    });
+
+    return res.json({ shot });
   }
 
-  res.status(401).json({ message: "Not authenticated" });
+  return res.status(405).json({ message: "Method not allowed" });
 };
 
 export default handler;

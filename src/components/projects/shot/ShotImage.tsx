@@ -10,13 +10,7 @@ const ShotImage = ({ shot }: { shot: Shot }) => {
   const { onOpen, onClose, isOpen: isZoomed } = useDisclosure();
 
   return (
-    <Box
-      height="100px"
-      width="100px"
-      backgroundColor="gray.100"
-      borderRadius="xl"
-      overflow="hidden"
-    >
+    <Box width="100%" backgroundColor="gray.100" overflow="hidden">
       <ControlledZoom
         isZoomed={isZoomed}
         onZoomChange={(shouldZoom) => {
