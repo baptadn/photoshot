@@ -31,7 +31,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         class_prompt: `a photo of a ${instanceClass}`,
         instance_data: `https://${process.env.S3_UPLOAD_BUCKET}.s3.amazonaws.com/${project.id}.zip`,
         max_train_steps: Number(process.env.MAX_TRAIN_STEPS),
-        num_class_images: 50,
+        num_class_images: Number(process.env.NUM_CLASS_IMAGES),
         learning_rate: 1e-6,
       },
       model: `${process.env.REPLICATE_USERNAME}/${project.name}`,
