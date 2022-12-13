@@ -30,6 +30,8 @@ import UploadErrorMessages from "./UploadErrorMessages";
 
 type TUploadState = "not_uploaded" | "uploading" | "uploaded";
 
+const MAX_FILES = 25;
+
 const Uploader = ({ handleOnAdd }: { handleOnAdd: () => void }) => {
   const [files, setFiles] = useState<(File & { preview: string })[]>([]);
   const [uploadState, setUploadState] = useState<TUploadState>("not_uploaded");
@@ -45,7 +47,6 @@ const Uploader = ({ handleOnAdd }: { handleOnAdd: () => void }) => {
       "image/png": [".png"],
       "image/jpeg": [".jpeg", ".jpg"],
     },
-    maxFiles: 25,
     maxSize: 10000000, // 10mo
     onDropRejected: (events) => {
       setErrorMessages([]);
@@ -60,15 +61,25 @@ const Uploader = ({ handleOnAdd }: { handleOnAdd: () => void }) => {
       setErrorMessages(Object.keys(messages).map((id) => messages[id]));
     },
     onDrop: (acceptedFiles) => {
-      setErrorMessages([]);
-      setFiles([
-        ...files,
-        ...acceptedFiles.map((file) =>
-          Object.assign(file, {
-            preview: URL.createObjectURL(file),
-          })
-        ),
-      ]);
+      if (files.length + acceptedFiles.length > MAX_FILES) {
+        toast({
+          title: `You can't upload more than ${MAX_FILES} images`,
+          duration: 3000,
+          isClosable: true,
+          position: "top-right",
+          status: "error",
+        });
+      } else {
+        setErrorMessages([]);
+        setFiles([
+          ...files,
+          ...acceptedFiles.map((file) =>
+            Object.assign(file, {
+              preview: URL.createObjectURL(file),
+            })
+          ),
+        ]);
+      }
     },
   });
 

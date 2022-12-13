@@ -2,7 +2,10 @@ import db from "@/core/db";
 import { NextApiRequest, NextApiResponse } from "next";
 import { getSession } from "next-auth/react";
 import replicateClient from "@/core/clients/replicate";
-import { getRefinedInstanceClass } from "@/core/utils/predictions";
+import {
+  getRefinedInstanceClass,
+  getTrainCoefficient,
+} from "@/core/utils/predictions";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const projectId = req.query.id as string;
@@ -22,6 +25,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   });
 
   const instanceClass = getRefinedInstanceClass(project.instanceClass);
+  const trainCoefficient = getTrainCoefficient(project.imageUrls.length);
 
   const responseReplicate = await replicateClient.post(
     "/v1/trainings",
@@ -30,9 +34,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         instance_prompt: `a photo of a ${project.instanceName} ${instanceClass}`,
         class_prompt: `a photo of a ${instanceClass}`,
         instance_data: `https://${process.env.S3_UPLOAD_BUCKET}.s3.amazonaws.com/${project.id}.zip`,
-        max_train_steps: Number(process.env.MAX_TRAIN_STEPS),
-        num_class_images: Number(process.env.NUM_CLASS_IMAGES),
+        max_train_steps: trainCoefficient * 80,
+        num_class_images: trainCoefficient * 12,
+        lr_warmup_steps: Math.round((trainCoefficient * 80) / 10),
         learning_rate: 1e-6,
+        lr_scheduler: "polynomial",
       },
       model: `${process.env.REPLICATE_USERNAME}/${project.name}`,
       webhook_completed: `${process.env.NEXTAUTH_URL}/api/webhooks/completed`,
