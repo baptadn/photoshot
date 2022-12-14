@@ -2,6 +2,7 @@ import replicateClient from "@/core/clients/replicate";
 import db from "@/core/db";
 import { NextApiRequest, NextApiResponse } from "next";
 import { getSession } from "next-auth/react";
+import { getPlaiceholder } from "plaiceholder";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const projectId = req.query.id as string;
@@ -26,11 +27,20 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       `https://api.replicate.com/v1/predictions/${shot.replicateId}`
     );
 
+    const outputUrl = prediction.output?.[0];
+    let blurhash = null;
+
+    if (outputUrl) {
+      const { base64 } = await getPlaiceholder(outputUrl, { size: 16 });
+      blurhash = base64;
+    }
+
     shot = await db.shot.update({
       where: { id: shot.id },
       data: {
         status: prediction.status,
-        outputUrl: prediction.output?.[0] || null,
+        outputUrl: outputUrl || null,
+        blurhash,
       },
     });
 

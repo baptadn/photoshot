@@ -31,6 +31,8 @@ const ShotImage = ({ shot }: { shot: Shot }) => {
         }}
       >
         <Image
+          placeholder="blur"
+          blurDataURL={shot.blurhash || "placeholder"}
           unoptimized
           alt={shot.prompt}
           src={shot.outputUrl!}

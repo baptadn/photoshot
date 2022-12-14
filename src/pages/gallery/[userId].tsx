@@ -6,7 +6,11 @@ import SuperJSON from "superjson";
 import { Box, SimpleGrid } from "@chakra-ui/react";
 import Image from "next/image";
 
-const Gallery = ({ shots }: { shots: { outputUrl: string }[] }) => {
+const Gallery = ({
+  shots,
+}: {
+  shots: { blurhash: string; outputUrl: string }[];
+}) => {
   return (
     <PageContainer>
       <SimpleGrid columns={{ base: 1, sm: 2, md: 3 }} spacing={6}>
@@ -20,6 +24,8 @@ const Gallery = ({ shots }: { shots: { outputUrl: string }[] }) => {
             position="relative"
           >
             <Image
+              placeholder="blur"
+              blurDataURL={shot.blurhash || "placeholder"}
               quality={100}
               alt={shot.outputUrl!}
               src={shot.outputUrl!}
@@ -48,7 +54,7 @@ export const getServerSideProps = async (
 ) => {
   const userId = context.query.userId as string;
   const shots = await db.shot.findMany({
-    select: { outputUrl: true },
+    select: { outputUrl: true, blurhash: true },
     orderBy: { createdAt: "desc" },
     where: {
       outputUrl: { not: { equals: null } },

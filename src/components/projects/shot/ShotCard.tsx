@@ -75,7 +75,7 @@ const ShotCard = ({ shot: initialShot }: { shot: Shot }) => {
         <Box>
           <AspectRatio ratio={1}>
             <Center backgroundColor="gray.100" width="100%">
-              <Spinner speed="2s" color="gray.400" />
+              <Spinner size="xl" speed="2s" color="gray.400" />
             </Center>
           </AspectRatio>
         </Box>
