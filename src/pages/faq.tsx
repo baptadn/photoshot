@@ -72,6 +72,12 @@ const Terms = () => {
           note that by deleting your account, you will no longer have access to
           any of the data or content associated with your account.
         </Text>
+        <Text>
+          Please be aware that only the data on Photoshot servers will be 
+          deleted. Data that was transmitted to Replicate will not be deleted.
+          You would have to contact them in order to do so, according to their 
+          <Link href="https://replicate.com/privacy">Terms of Service</Link>.
+        </Text>
       </VStack>
     </PageContainer>
   );
