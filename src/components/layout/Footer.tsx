@@ -2,6 +2,7 @@ import { Box, chakra, Container, Stack, Text } from "@chakra-ui/react";
 import { FaGithub, FaTwitter } from "react-icons/fa";
 import { ReactNode } from "react";
 import { MdAlternateEmail } from "react-icons/md";
+import Link from "next/link";
 
 const SocialButton = ({
   children,
@@ -41,14 +42,17 @@ export default function Footer() {
         maxWidth="container.lg"
         py={4}
         direction={{ base: "column", md: "row" }}
-        spacing={4}
+        spacing={6}
         justify={{ base: "center", md: "space-between" }}
         align={{ base: "center", md: "center" }}
       >
         <Text></Text>
-        <Stack alignItems="center" direction="row" spacing={6}>
-          <Text fontSize="lg" fontWeight="bold">
-            Photoshot.
+        <Stack alignItems="center" direction="row" spacing={4}>
+          <Text fontSize="sm">
+            <Link href="/terms">Terms and Privacy</Link>
+          </Text>
+          <Text fontSize="sm">
+            <Link href="/faq">FAQ</Link>
           </Text>
           <SocialButton href="https://github.com/shinework/photoshot">
             <FaGithub />
@@ -59,6 +63,9 @@ export default function Footer() {
           <SocialButton href="mailto:support@photoshot.app">
             <MdAlternateEmail />
           </SocialButton>
+          <Text fontSize="lg" fontWeight="bold">
+            Photoshot.
+          </Text>
         </Stack>
       </Container>
     </Box>
