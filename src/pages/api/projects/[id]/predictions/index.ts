@@ -23,7 +23,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { data } = await replicateClient.post(
     `https://api.replicate.com/v1/predictions`,
     {
-      input: { prompt },
+      input: {
+        prompt,
+      },
       version: project.modelVersionId,
     }
   );

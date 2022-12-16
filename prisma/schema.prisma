@@ -60,7 +60,7 @@ model VerificationToken {
 }
 
 model Project {
-  id               String   @id @default(cuid())
+  id               String    @id @default(cuid())
   name             String
   replicateModelId String?
   stripePaymentId  String?
@@ -70,12 +70,13 @@ model Project {
   instanceClass    String
   imageUrls        String[]
   zipImageUrl      String?
-  createdAt        DateTime @default(now())
-  updatedAt        DateTime @updatedAt
-  User             User?    @relation(fields: [userId], references: [id])
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+  User             User?     @relation(fields: [userId], references: [id])
   userId           String?
   shots            Shot[]
-  credits          Int @default(100)
+  credits          Int       @default(100)
+  Payment          Payment[]
 }
 
 model Shot {
@@ -90,4 +91,16 @@ model Shot {
   outputUrl   String?
   bookmarked  Boolean? @default(false)
   blurhash    String?
+}
+
+model Payment {
+  id        String   @id @default(cuid())
+  type      String
+  status    String
+  stripeSessionId String
+  createdAt DateTime @default(now())
+  Project   Project? @relation(fields: [projectId], references: [id])
+  projectId String?
+
+  @@map("payments")
 }
