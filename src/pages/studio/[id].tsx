@@ -1,32 +1,29 @@
 import PageContainer from "@/components/layout/PageContainer";
+import BuyShotButton from "@/components/projects/shot/BuyShotButton";
 import ShotCard from "@/components/projects/shot/ShotCard";
 import db from "@/core/db";
+import { getRefinedInstanceClass } from "@/core/utils/predictions";
 import {
-  Badge,
   Box,
   Button,
-  Divider,
   Flex,
   Icon,
+  Link as ChakraLink,
+  SimpleGrid,
   Text,
   Textarea,
-  Link as ChakraLink,
-  VStack,
-  SimpleGrid,
 } from "@chakra-ui/react";
 import { Project, Shot } from "@prisma/client";
 import axios from "axios";
 import { GetServerSidePropsContext } from "next";
 import { getSession } from "next-auth/react";
+import Link from "next/link";
 import { useRef, useState } from "react";
+import { BsLightbulb } from "react-icons/bs";
+import { FaMagic } from "react-icons/fa";
+import { HiArrowLeft } from "react-icons/hi";
 import { useMutation, useQuery } from "react-query";
 import superjson from "superjson";
-import { FaMagic } from "react-icons/fa";
-import { formatRelative } from "date-fns";
-import Link from "next/link";
-import { HiArrowLeft } from "react-icons/hi";
-import { BsLightbulb } from "react-icons/bs";
-import { getRefinedInstanceClass } from "@/core/utils/predictions";
 
 export type ProjectWithShots = Project & {
   shots: Shot[];
@@ -108,17 +105,17 @@ const StudioPage = ({ project }: IStudioPageProps) => {
       >
         <Text fontSize="2xl" fontWeight="semibold">
           Studio <b>{project.instanceName}</b>{" "}
-          <Badge colorScheme="teal">{shotCredits} shots left</Badge>
+          <BuyShotButton
+            credits={shotCredits}
+            onPaymentSuccess={(credits: number) => {
+              setShotCredits(credits);
+            }}
+          />
         </Text>
-        <Text textTransform="capitalize" fontSize="sm">
-          {formatRelative(new Date(project.createdAt), new Date())}
-        </Text>
-
         <Flex
           flexDirection={{ base: "column", sm: "row" }}
           gap={{ base: 4, md: 2 }}
-          mt={10}
-          mb={4}
+          my={6}
           as="form"
           onSubmit={(e) => {
             e.preventDefault();
@@ -129,6 +126,7 @@ const StudioPage = ({ project }: IStudioPageProps) => {
           width="100%"
         >
           <Textarea
+            disabled={shotCredits === 0}
             ref={promptInputRef}
             backgroundColor="white"
             isRequired
@@ -144,13 +142,14 @@ const StudioPage = ({ project }: IStudioPageProps) => {
             )} as an astronaut, highly-detailed, trending on artstation`}
           />
           <Button
+            disabled={shotCredits === 0}
             type="submit"
             size="lg"
             variant="brand"
             rightIcon={<FaMagic />}
             isLoading={isLoading}
           >
-            Generate
+            {shotCredits === 0 ? "No more shot" : "Generate"}
           </Button>
         </Flex>
         <Text fontSize="md">

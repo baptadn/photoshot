@@ -29,7 +29,8 @@ const FormPayment = ({
 
   useQuery(
     "check-payment",
-    () => axios.get(`/api/checkout/check/${query.ppi}/${query.session_id}`),
+    () =>
+      axios.get(`/api/checkout/check/${query.ppi}/${query.session_id}/studio`),
     {
       cacheTime: 0,
       refetchInterval: 10,

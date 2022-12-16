@@ -4,7 +4,6 @@ import {
   HStack,
   Icon,
   IconButton,
-  Popover,
   Text,
   Tooltip,
 } from "@chakra-ui/react";
