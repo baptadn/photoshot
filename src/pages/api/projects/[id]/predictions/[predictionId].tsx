@@ -1,5 +1,6 @@
 import replicateClient from "@/core/clients/replicate";
 import db from "@/core/db";
+import { extractSeedFromLogs } from "@/core/utils/predictions";
 import { NextApiRequest, NextApiResponse } from "next";
 import { getSession } from "next-auth/react";
 import { getPlaiceholder } from "plaiceholder";
@@ -35,12 +36,15 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       blurhash = base64;
     }
 
+    const seedNumber = extractSeedFromLogs(prediction.logs);
+
     shot = await db.shot.update({
       where: { id: shot.id },
       data: {
         status: prediction.status,
         outputUrl: outputUrl || null,
         blurhash,
+        seed: seedNumber || null,
       },
     });
 
