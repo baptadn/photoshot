@@ -19,7 +19,7 @@ export const getTrainCoefficient = (imagesCount: number) => {
 export const extractSeedFromLogs = (logsContent: string) => {
   try {
     const logLines = logsContent.split("\n");
-    const seedLine = logLines[0];
+    const seedLine = logLines[1];
     const seedValue = seedLine.split(":")[1].trim();
 
     return seedValue ? Number(seedValue) : undefined;
