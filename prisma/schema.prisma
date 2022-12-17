@@ -91,6 +91,7 @@ model Shot {
   outputUrl   String?
   bookmarked  Boolean? @default(false)
   blurhash    String?
+  seed        Int?
 }
 
 model Payment {

@@ -5,6 +5,8 @@ import { getSession } from "next-auth/react";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const prompt = req.body.prompt as string;
+  const seed = req.body.seed as number;
+
   const projectId = req.query.id as string;
   const session = await getSession({ req });
 
@@ -25,6 +27,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     {
       input: {
         prompt,
+        ...(seed && { seed }),
       },
       version: project.modelVersionId,
     }

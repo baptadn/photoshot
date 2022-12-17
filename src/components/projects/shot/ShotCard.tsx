@@ -5,7 +5,7 @@ import {
   Center,
   Flex,
   HStack,
-  Icon,
+  IconButton,
   Link,
   Spinner,
   Text,
@@ -18,10 +18,18 @@ import { formatRelative } from "date-fns";
 import { useRouter } from "next/router";
 import { memo, useState } from "react";
 import { BsHeart, BsHeartFill } from "react-icons/bs";
+import { HiDownload } from "react-icons/hi";
+import { MdOutlineModelTraining } from "react-icons/md";
 import { useMutation, useQuery } from "react-query";
 import ShotImage from "./ShotImage";
 
-const ShotCard = ({ shot: initialShot }: { shot: Shot }) => {
+const ShotCard = ({
+  shot: initialShot,
+  handleSeed,
+}: {
+  shot: Shot;
+  handleSeed: (shot: Shot) => void;
+}) => {
   const { onCopy, hasCopied } = useClipboard(initialShot.prompt);
   const { query } = useRouter();
   const [shot, setShot] = useState(initialShot);
@@ -81,24 +89,59 @@ const ShotCard = ({ shot: initialShot }: { shot: Shot }) => {
         </Box>
       )}
       <Flex position="relative" p={3} flexDirection="column">
-        <Flex alignItems="flex-start" justifyContent="space-between">
+        <Flex alignItems="center" justifyContent="space-between">
           <Text color="blackAlpha.700" fontSize="xs">
             {formatRelative(new Date(shot.createdAt), new Date())}
           </Text>
-          <Tooltip
-            hasArrow
-            label={`${shot.bookmarked ? "Remove" : "Add"} to your gallery`}
-          >
-            <Box>
-              <Icon
+          <Box>
+            {shot.seed && shot.outputUrl && (
+              <Tooltip hasArrow label="Re-use style">
+                <IconButton
+                  size="sm"
+                  onClick={() => {
+                    handleSeed(shot);
+                    window.scrollTo({
+                      top: 0,
+                      left: 0,
+                      behavior: "smooth",
+                    });
+                  }}
+                  variant="ghost"
+                  aria-label="Download"
+                  fontSize="md"
+                  icon={<MdOutlineModelTraining />}
+                />
+              </Tooltip>
+            )}
+            {shot.outputUrl && (
+              <IconButton
+                size="sm"
+                as={Link}
+                href={shot.outputUrl}
+                target="_blank"
+                variant="ghost"
+                aria-label="Download"
+                fontSize="md"
+                icon={<HiDownload />}
+              />
+            )}
+            <Tooltip
+              hasArrow
+              label={`${shot.bookmarked ? "Remove" : "Add"} to your gallery`}
+            >
+              <IconButton
+                isLoading={isLoading}
+                size="sm"
+                variant="ghost"
+                aria-label="Bookmark"
+                fontSize="md"
+                icon={shot.bookmarked ? <BsHeartFill /> : <BsHeart />}
                 onClick={() => bookmark(!shot.bookmarked)}
-                cursor="pointer"
                 pointerEvents={isLoading ? "none" : "auto"}
                 color={shot.bookmarked ? "red" : "inherit"}
-                as={shot.bookmarked ? BsHeartFill : BsHeart}
               />
-            </Box>
-          </Tooltip>
+            </Tooltip>
+          </Box>
         </Flex>
         <Text
           mt={2}
@@ -119,22 +162,6 @@ const ShotCard = ({ shot: initialShot }: { shot: Shot }) => {
           >
             {hasCopied ? "Copied" : "Copy prompt"}
           </Button>
-          {shot.outputUrl && (
-            <>
-              <Box>-</Box>
-              <Button
-                size="sm"
-                as={Link}
-                href={shot.outputUrl}
-                color="blackAlpha.600"
-                target="_blank"
-                variant="link"
-                onClick={onCopy}
-              >
-                Download
-              </Button>
-            </>
-          )}
         </HStack>
       </Flex>
     </Box>
