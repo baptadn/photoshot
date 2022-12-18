@@ -51,7 +51,6 @@
     "superjson": "^1.12.0",
     "typescript": "4.9.3",
     "uniqid": "^5.4.0",
-    "url-slug": "^3.0.4",
     "windups": "^1.2.1"
   },
   "devDependencies": {

@@ -1,5 +1,4 @@
 import BuyShotButton from "@/components/projects/shot/BuyShotButton";
-import { getRefinedInstanceClass } from "@/core/utils/predictions";
 import useProjectContext from "@/hooks/use-project-context";
 import {
   Box,
@@ -85,11 +84,7 @@ const PromptPanel = () => {
           focusBorderColor="gray.400"
           _focus={{ shadow: "md" }}
           mr={2}
-          placeholder={`a portrait of a ${
-            project.instanceName
-          } ${getRefinedInstanceClass(
-            project.instanceClass
-          )} as an astronaut, highly-detailed, trending on artstation`}
+          placeholder={`a portrait of a @me as an astronaut, highly-detailed, trending on artstation`}
         />
 
         <Button
@@ -139,12 +134,8 @@ const PromptPanel = () => {
         </HStack>
       ) : (
         <Text fontSize="md">
-          <Icon as={BsLightbulb} /> Use the keyword{" "}
-          <b>
-            {project.instanceName}{" "}
-            {getRefinedInstanceClass(project.instanceClass)}
-          </b>{" "}
-          as the subject in your prompt. Need prompt inspiration? Check{" "}
+          <Icon as={BsLightbulb} /> Use the keyword <b>@me</b> as the subject in
+          your prompt. Need prompt inspiration? Check{" "}
           <ChakraLink
             textDecoration="underline"
             isExternal

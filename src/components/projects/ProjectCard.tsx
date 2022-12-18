@@ -1,3 +1,4 @@
+import { getRefinedStudioName } from "@/core/utils/projects";
 import { ProjectWithShots } from "@/pages/studio/[id]";
 import {
   Avatar,
@@ -68,7 +69,7 @@ const ProjectCard = ({
         <Flex width="100%">
           <Box flex="1">
             <Text fontSize="2xl" fontWeight="semibold">
-              Studio <b>{project.instanceName}</b>{" "}
+              Studio <b>{getRefinedStudioName(project)}</b>{" "}
               {isReady && (
                 <Badge colorScheme="teal">{project.credits} shots left</Badge>
               )}

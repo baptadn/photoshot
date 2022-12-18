@@ -1,5 +1,6 @@
 import replicateClient from "@/core/clients/replicate";
 import db from "@/core/db";
+import { replacePromptToken } from "@/core/utils/predictions";
 import { NextApiRequest, NextApiResponse } from "next";
 import { getSession } from "next-auth/react";
 
@@ -26,7 +27,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     `https://api.replicate.com/v1/predictions`,
     {
       input: {
-        prompt,
+        prompt: replacePromptToken(prompt, project),
         ...(seed && { seed }),
       },
       version: project.modelVersionId,
@@ -35,7 +36,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const shot = await db.shot.create({
     data: {
-      prompt: data.input.prompt,
+      prompt,
       replicateId: data.id,
       status: "starting",
       projectId: project.id,

@@ -55,6 +55,10 @@ S3_UPLOAD_REGION=
 // Replicate API token / username
 REPLICATE_API_TOKEN=
 REPLICATE_USERNAME=
+REPLICATE_MAX_TRAIN_STEPS=3000
+
+// Replicate instance token (should be rare)
+NEXT_PUBLIC_REPLICATE_INSTANCE_TOKEN=
 
 // Random secret for NextAuth
 SECRET=

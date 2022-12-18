@@ -1,12 +1,10 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { getSession } from "next-auth/react";
 import db from "@/core/db";
-import uniqid from "uniqid";
 import { createZipFolder } from "@/core/utils/assets";
 import s3Client from "@/core/clients/s3";
 import { PutObjectCommand } from "@aws-sdk/client-s3";
 import replicateClient from "@/core/clients/replicate";
-import urlSlug from "url-slug";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const session = await getSession({ req });
@@ -17,17 +15,17 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   if (req.method === "POST") {
     const urls = req.body.urls as string[];
-    const instanceName = req.body.instanceName as string;
+    const studioName = req.body.studioName as string;
     const instanceClass = req.body.instanceClass as string;
 
     const project = await db.project.create({
       data: {
         imageUrls: urls,
-        name: uniqid(),
+        name: studioName,
         userId: session.userId,
         modelStatus: "not_created",
         instanceClass: instanceClass || "person",
-        instanceName: urlSlug(instanceName, { separator: "" }),
+        instanceName: process.env.NEXT_PUBLIC_REPLICATE_INSTANCE_TOKEN!,
         credits: Number(process.env.NEXT_PUBLIC_STUDIO_SHOT_AMOUNT) || 50,
       },
     });

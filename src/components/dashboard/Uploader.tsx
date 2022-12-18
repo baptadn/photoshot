@@ -37,7 +37,7 @@ const Uploader = ({ handleOnAdd }: { handleOnAdd: () => void }) => {
   const [uploadState, setUploadState] = useState<TUploadState>("not_uploaded");
   const [errorMessages, setErrorMessages] = useState<string[]>([]);
   const [urls, setUrls] = useState<string[]>([]);
-  const [instanceName, setInstanceName] = useState<string>("");
+  const [studioName, setStudioName] = useState<string>("");
   const [instanceClass, setInstanceClass] = useState<string>("man");
   const { uploadToS3 } = useS3Upload();
   const toast = useToast();
@@ -102,7 +102,7 @@ const Uploader = ({ handleOnAdd }: { handleOnAdd: () => void }) => {
     () =>
       axios.post("/api/projects", {
         urls,
-        instanceName,
+        studioName,
         instanceClass,
       }),
     {
@@ -112,7 +112,7 @@ const Uploader = ({ handleOnAdd }: { handleOnAdd: () => void }) => {
         // Reset
         setFiles([]);
         setUrls([]);
-        setInstanceName("");
+        setStudioName("");
         setInstanceClass("");
         setUploadState("not_uploaded");
 
@@ -262,17 +262,10 @@ const Uploader = ({ handleOnAdd }: { handleOnAdd: () => void }) => {
             <Input
               isRequired
               backgroundColor="white"
-              placeholder="Subject name"
-              value={instanceName}
-              onChange={(e) => setInstanceName(e.currentTarget.value)}
+              placeholder="Studio name"
+              value={studioName}
+              onChange={(e) => setStudioName(e.currentTarget.value)}
             />
-            <FormHelperText color="blackAlpha.600">
-              This name will be use to name your person in your prompt:{" "}
-              <b>{`Painting of ${
-                instanceName || "Alice"
-              } ${instanceClass} by Andy Warhol`}</b>
-              .
-            </FormHelperText>
           </FormControl>
           <FormControl>
             <Select
@@ -293,12 +286,12 @@ const Uploader = ({ handleOnAdd }: { handleOnAdd: () => void }) => {
           </FormControl>
           <Box>
             <Button
-              disabled={!Boolean(instanceName)}
+              disabled={!Boolean(studioName)}
               isLoading={isLoading}
               variant="brand"
               rightIcon={<MdCheckCircle />}
               onClick={() => {
-                if (instanceName && instanceClass) {
+                if (studioName && instanceClass) {
                   handleCreateProject();
                 }
               }}
