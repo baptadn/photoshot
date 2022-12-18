@@ -4976,11 +4976,6 @@ uri-js@^4.2.2:
   dependencies:
     punycode "^2.1.0"
 
-url-slug@^3.0.4:
-  version "3.0.4"
-  resolved "https://registry.yarnpkg.com/url-slug/-/url-slug-3.0.4.tgz#3278b556666389cd88d9210a12e7577dafac6d57"
-  integrity sha512-C880WJTo68O4J59i+w9Yp4P0iDUrMeCAVwNvHAYjSc59XsO4pkPfe8bsEHEyZrEfWWy8BDyxMQi6BPVHp/GEbg==
-
 use-callback-ref@^1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/use-callback-ref/-/use-callback-ref-1.3.0.tgz#772199899b9c9a50526fedc4993fc7fa1f7e32d5"
