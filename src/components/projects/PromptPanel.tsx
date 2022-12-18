@@ -1,4 +1,5 @@
 import BuyShotButton from "@/components/projects/shot/BuyShotButton";
+import { getRefinedStudioName } from "@/core/utils/projects";
 import useProjectContext from "@/hooks/use-project-context";
 import {
   Box,
@@ -52,7 +53,7 @@ const PromptPanel = () => {
       backgroundColor="white"
     >
       <Text fontSize="2xl" fontWeight="semibold">
-        Studio <b>{project.instanceName}</b>{" "}
+        Studio <b>{getRefinedStudioName(project)}</b>{" "}
         <BuyShotButton
           credits={shotCredits}
           onPaymentSuccess={(credits: number) => {
