@@ -27,7 +27,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     "/v1/trainings",
     {
       input: {
-        instance_prompt: `a photo of a ${process.env.INSTANCE_TOKEN} ${instanceClass}`,
+        instance_prompt: `a photo of a ${process.env.NEXT_PUBLIC_REPLICATE_INSTANCE_TOKEN} ${instanceClass}`,
         class_prompt: `a photo of a ${instanceClass}`,
         instance_data: `https://${process.env.S3_UPLOAD_BUCKET}.s3.amazonaws.com/${project.id}.zip`,
         max_train_steps: Number(process.env.REPLICATE_MAX_TRAIN_STEPS),
