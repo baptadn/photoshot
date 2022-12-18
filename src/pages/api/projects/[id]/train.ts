@@ -34,7 +34,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         num_class_images: 200,
         learning_rate: 1e-6,
       },
-      model: `${process.env.REPLICATE_USERNAME}/${project.name}`,
+      model: `${process.env.REPLICATE_USERNAME}/${project.id}`,
       webhook_completed: `${process.env.NEXTAUTH_URL}/api/webhooks/completed`,
     },
     {
