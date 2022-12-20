@@ -63,6 +63,7 @@ const PomptWizardPopover = () => {
         <ModalContent
           onSubmit={(e) => {
             e.preventDefault();
+            e.stopPropagation();
 
             if (keyword) {
               createPrompt(keyword);
