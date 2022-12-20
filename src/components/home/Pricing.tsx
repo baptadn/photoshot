@@ -77,6 +77,9 @@ const Pricing = () => {
             <b>{process.env.NEXT_PUBLIC_STUDIO_SHOT_AMOUNT}</b> images
             generation
           </CheckedListItem>
+          <CheckedListItem>
+            <b>30</b> AI prompt assists
+          </CheckedListItem>
           <CheckedListItem>Craft your own prompt</CheckedListItem>
           <CheckedListItem>Sponsorship development 🖤</CheckedListItem>
         </List>

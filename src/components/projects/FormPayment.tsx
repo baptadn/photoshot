@@ -80,6 +80,9 @@ const FormPayment = ({
               generation (512x512 resolution)
             </CheckedListItem>
             <CheckedListItem>
+              <b>30</b> AI prompt assists
+            </CheckedListItem>
+            <CheckedListItem>
               Your Studio will be deleted 24 hours after your credits are
               exhausted
             </CheckedListItem>
