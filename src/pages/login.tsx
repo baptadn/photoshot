@@ -10,7 +10,7 @@ const Login = () => {
   return (
     <Flex flex="1" align="center" justify="center">
       {router.query.verifyRequest ? (
-        <Box textAlign="center">
+        <Box mx={{ base: 4, md: 0 }} textAlign="center">
           <Heading>
             Check your email <Icon mb="-4px" as={MdCheckCircleOutline} />
           </Heading>

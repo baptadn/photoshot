@@ -19,6 +19,7 @@ import { useRouter } from "next/router";
 import { memo, useState } from "react";
 import { BsHeart, BsHeartFill } from "react-icons/bs";
 import { HiDownload } from "react-icons/hi";
+import { IoMdCheckmarkCircleOutline } from "react-icons/io";
 import { MdOutlineModelTraining } from "react-icons/md";
 import { useMutation, useQuery } from "react-query";
 import ShotImage from "./ShotImage";
@@ -155,8 +156,9 @@ const ShotCard = ({
 
         <HStack mt={4}>
           <Button
-            size="sm"
-            color="blackAlpha.600"
+            rightIcon={hasCopied ? <IoMdCheckmarkCircleOutline /> : undefined}
+            colorScheme="beige"
+            size="xs"
             variant="link"
             onClick={onCopy}
           >

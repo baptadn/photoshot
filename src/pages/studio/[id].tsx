@@ -24,7 +24,7 @@ const StudioPage = ({ project }: IStudioPageProps) => (
     <PageContainer>
       <Box mb={4}>
         <Button
-          color="blackAlpha.500"
+          color="beige.500"
           leftIcon={<HiArrowLeft />}
           variant="link"
           href="/dashboard"

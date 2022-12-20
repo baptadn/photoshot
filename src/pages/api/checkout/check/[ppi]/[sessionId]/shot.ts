@@ -35,9 +35,14 @@ export default async function handler(
     session.metadata?.projectId === ppi
   ) {
     const quantity = Number(session.metadata?.quantity);
+    const promptWizardQuantity = Number(session.metadata?.promptWizardQuantity);
+
     const project = await db.project.update({
       where: { id: ppi },
-      data: { credits: { increment: quantity } },
+      data: {
+        credits: { increment: quantity },
+        promptWizardCredits: { increment: promptWizardQuantity },
+      },
     });
 
     await db.payment.create({
@@ -49,7 +54,11 @@ export default async function handler(
       },
     });
 
-    return res.status(200).json({ success: true, credits: project.credits });
+    return res.status(200).json({
+      success: true,
+      credits: project.credits,
+      promptWizardCredits: project.promptWizardCredits,
+    });
   }
 
   return res.status(400).json({ success: false });

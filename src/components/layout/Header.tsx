@@ -58,10 +58,10 @@ const Header = () => {
             </Tooltip>
             <Tooltip hasArrow label="Logout">
               <IconButton
-                _hover={{ bg: "brand.500" }}
                 aria-label="logout"
                 icon={<HiLogout />}
                 size="sm"
+                colorScheme="beige"
                 variant="ghost"
                 onClick={() => {
                   signOut({ callbackUrl: "/" });

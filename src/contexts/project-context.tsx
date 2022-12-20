@@ -10,7 +10,9 @@ export const ProjectContext = createContext<{
   shots: Shot[];
   hasMoreResult: boolean;
   shotCredits: number;
+  promptWizardCredits: number;
   updateCredits: (shotCredits: number) => void;
+  updatePromptWizardCredits: (promptWizardCredits: number) => void;
   isLoadingMore: boolean;
   addShot: (shot: Shot) => void;
   project: IStudioPageProps["project"];
@@ -28,7 +30,6 @@ export const ProjectProvider = ({
   project: IStudioPageProps["project"];
 }) => {
   const promptInputRef = useRef<HTMLTextAreaElement>(null);
-
   const [shots, setShots] = useState(project.shots);
   const [shotTemplate, setShotTemplate] = useState<Shot>();
   const [skip, setSkip] = useState(PROJECTS_PER_PAGE);
@@ -37,6 +38,9 @@ export const ProjectProvider = ({
   );
 
   const [shotCredits, setShotCredits] = useState(project.credits);
+  const [promptWizardCredits, setPromptWizardCredits] = useState(
+    project.promptWizardCredits
+  );
 
   const { isLoading: isLoadingMore, refetch } = useQuery(
     `shots-${PROJECTS_PER_PAGE}-${skip}`,
@@ -68,6 +72,10 @@ export const ProjectProvider = ({
     setShotCredits(credits);
   };
 
+  const updatePromptWizardCredits = (credits: number) => {
+    setPromptWizardCredits(credits);
+  };
+
   const updateShotTemplate = (shotTemplate: Shot | undefined) => {
     setShotTemplate(shotTemplate);
 
@@ -94,6 +102,8 @@ export const ProjectProvider = ({
         updateShotTemplate,
         fetchShots,
         promptInputRef,
+        promptWizardCredits,
+        updatePromptWizardCredits,
       }}
     >
       {children}

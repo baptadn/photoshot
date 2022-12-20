@@ -5,7 +5,11 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: "2022-11-15",
 });
 
-const PRICES = { 100: 400, 200: 700, 300: 900 };
+const PRICES = {
+  100: { price: 400, promptWizardQuantity: 20 },
+  200: { price: 700, promptWizardQuantity: 40 },
+  300: { price: 900, promptWizardQuantity: 80 },
+};
 
 export default async function handler(
   req: NextApiRequest,
@@ -24,14 +28,15 @@ export default async function handler(
       metadata: {
         projectId: req.query.ppi as string,
         quantity,
+        promptWizardQuantity: PRICES[quantity].promptWizardQuantity,
       },
       line_items: [
         {
           price_data: {
             currency: "usd",
-            unit_amount: PRICES[quantity],
+            unit_amount: PRICES[quantity].price,
             product_data: {
-              name: `⚡️ Refill +${quantity} shots`,
+              name: `⚡️ Refill +${quantity} shots and ${PRICES[quantity].promptWizardQuantity} prompt assists`,
             },
           },
           quantity: 1,
