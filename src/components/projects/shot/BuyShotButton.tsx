@@ -19,7 +19,7 @@ const BuyShotButton = ({
   onPaymentSuccess,
 }: {
   credits: number;
-  onPaymentSuccess: (credits: number) => void;
+  onPaymentSuccess: (credits: number, promptWizardCredits: number) => void;
 }) => {
   const { push, query } = useRouter();
   const [waitingPayment, setWaitingPayment] = useState(false);
@@ -34,7 +34,8 @@ const BuyShotButton = ({
       retry: 0,
       enabled: waitingPayment,
       onSuccess: (response) => {
-        onPaymentSuccess(response.data.credits);
+        const { credits, promptWizardCredits } = response.data;
+        onPaymentSuccess(credits, promptWizardCredits);
       },
       onSettled: () => {
         setWaitingPayment(false);
@@ -78,7 +79,8 @@ const BuyShotButton = ({
             handleShotPayment(100);
           }}
         >
-          Add <b>100 shots</b>
+          <b>100 shots</b>
+          <Text fontSize="xs">+20 prompt assists</Text>
         </MenuItem>
         <MenuItem
           command="$7"
@@ -86,7 +88,8 @@ const BuyShotButton = ({
             handleShotPayment(200);
           }}
         >
-          Add <b>200 shots</b>
+          <b>200 shots</b>
+          <Text fontSize="xs">+40 prompt assists</Text>
         </MenuItem>
         <MenuItem
           command="$9"
@@ -94,7 +97,8 @@ const BuyShotButton = ({
             handleShotPayment(300);
           }}
         >
-          Add <b>300 shots</b>
+          <b>300 shots</b>
+          <Text fontSize="xs">+60 prompt assists</Text>
         </MenuItem>
       </MenuList>
     </Menu>

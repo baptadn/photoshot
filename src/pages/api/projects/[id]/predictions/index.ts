@@ -28,6 +28,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     {
       input: {
         prompt: replacePromptToken(prompt, project),
+        negative_prompt: process.env.REPLICATE_NEGATIVE_PROMPT,
         ...(seed && { seed }),
       },
       version: project.modelVersionId,

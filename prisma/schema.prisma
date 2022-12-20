@@ -60,23 +60,24 @@ model VerificationToken {
 }
 
 model Project {
-  id               String    @id @default(cuid())
-  name             String
-  replicateModelId String?
-  stripePaymentId  String?
-  modelVersionId   String?
-  modelStatus      String?
-  instanceName     String
-  instanceClass    String
-  imageUrls        String[]
-  zipImageUrl      String?
-  createdAt        DateTime  @default(now())
-  updatedAt        DateTime  @updatedAt
-  User             User?     @relation(fields: [userId], references: [id])
-  userId           String?
-  shots            Shot[]
-  credits          Int       @default(100)
-  Payment          Payment[]
+  id                  String    @id @default(cuid())
+  name                String
+  replicateModelId    String?
+  stripePaymentId     String?
+  modelVersionId      String?
+  modelStatus         String?
+  instanceName        String
+  instanceClass       String
+  imageUrls           String[]
+  zipImageUrl         String?
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+  User                User?     @relation(fields: [userId], references: [id])
+  userId              String?
+  shots               Shot[]
+  credits             Int       @default(100)
+  promptWizardCredits Int       @default(30)
+  Payment             Payment[]
 }
 
 model Shot {
