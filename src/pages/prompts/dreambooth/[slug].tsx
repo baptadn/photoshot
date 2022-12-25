@@ -18,7 +18,7 @@ import { FaMagic } from "react-icons/fa";
 import { HiArrowLeft } from "react-icons/hi";
 import { description } from "..";
 
-type TPrompt = typeof prompts[number];
+export type TPrompt = typeof prompts[number];
 
 const PromptPage = ({
   prompt,
