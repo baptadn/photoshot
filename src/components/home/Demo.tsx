@@ -1,34 +1,19 @@
+import { prompts } from "@/core/utils/prompts";
 import { Box, Flex, Image } from "@chakra-ui/react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { Pause, WindupChildren } from "windups";
 import AvatarsPlaceholder from "./AvatarsPlaceholder";
-
-const examples = [
-  {
-    label: "illustration of Tom in the style of Charles Burns",
-    imageUrl: "/shots/crumb.png",
-  },
-  { label: "Painting of Tom by Edvard Munch", imageUrl: "/shots/munch.png" },
-  { label: "Portrait of Tom as Pixar character", imageUrl: "/shots/pixar.png" },
-  { label: "Portrait of Tom as Spiderman", imageUrl: "/shots/spiderman.jpg" },
-  { label: "Painting of Tom by Van Gogh", imageUrl: "/shots/vangogh.png" },
-  { label: "Portrait of Tom as a warrior", imageUrl: "/shots/warrior.png" },
-  { label: "Painting of Tom by Andy Warhol", imageUrl: "/shots/wharol.png" },
-  { label: "Portrait of Tom as Santa Claus", imageUrl: "/shots/santa.jpg" },
-  {
-    label: "painting of Tom by Gustav Klimt",
-    imageUrl: "/shots/klimt.png",
-  },
-];
-
-const prompts = examples.sort((a, b) => 0.5 - Math.random());
+import urlSlug from "url-slug";
 
 const MotionImage = motion(Image);
 const MotionBox = motion(Box);
 
 const Demo = () => {
   const [step, setStep] = useState(0);
+  const prompt = prompts[step];
+  const names = ["romy", "sacha"] as const;
+  const index = Math.random() >= 0.5 ? 1 : 0;
 
   return (
     <Box ml={{ base: 0, lg: 10 }} width="100%">
@@ -49,7 +34,7 @@ const Demo = () => {
             setStep(step === prompts.length - 1 ? 0 : step + 1);
           }}
         >
-          {prompts[step].label}
+          {prompt.prompt.split(",")[0]}
           <Pause ms={4000} />
         </WindupChildren>
         <MotionBox
@@ -66,21 +51,23 @@ const Demo = () => {
       </Box>
       <Flex justifyContent="space-between" mt={6} pr={6}>
         <Box width="100%" position="relative" ml={10}>
-          <AvatarsPlaceholder />
+          <AvatarsPlaceholder character={names[index]} />
         </Box>
         <AnimatePresence mode="wait">
           <MotionImage
-            key={prompts[step].label}
+            key={prompt.label}
             initial={{ x: -30, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: 30, opacity: 0 }}
             transition={{ delay: 0.2 }}
             shadow="2xl"
             borderRadius="3xl"
-            width="10rem"
+            width="14rem"
             zIndex={10}
-            alt={prompts[step].label}
-            src={prompts[step].imageUrl}
+            alt={prompt.label}
+            src={`/prompts/${names[index]}/${urlSlug(prompt.label, {
+              separator: "-",
+            })}.png`}
           />
         </AnimatePresence>
       </Flex>

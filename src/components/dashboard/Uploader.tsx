@@ -145,7 +145,7 @@ const Uploader = ({ handleOnAdd }: { handleOnAdd: () => void }) => {
         >
           <input {...getInputProps()} />
           <Box mb={4} position="relative">
-            <AvatarsPlaceholder />
+            <AvatarsPlaceholder character="sacha" />
           </Box>
           <VStack textAlign="center" spacing={1}>
             <Box fontWeight="bold" fontSize="2xl">
@@ -279,6 +279,7 @@ const Uploader = ({ handleOnAdd }: { handleOnAdd: () => void }) => {
               <option value="dog">Dog</option>
               <option value="cat">Cat</option>
               <option value="couple">Couple</option>
+              <option value="style">Style</option>
             </Select>
             <FormHelperText color="blackAlpha.600">
               Type of the subject

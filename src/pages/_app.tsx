@@ -13,7 +13,7 @@ import DefaultHead from "@/components/layout/DefaultHead";
 import "react-medium-image-zoom/dist/styles.css";
 
 const queryClient = new QueryClient();
-const inter = Inter({ subsets: ["latin"] });
+export const inter = Inter({ subsets: ["latin"] });
 
 function App({
   Component,

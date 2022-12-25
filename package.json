@@ -45,6 +45,7 @@
     "react-dropzone": "^14.2.3",
     "react-icons": "^4.7.1",
     "react-medium-image-zoom": "^5.1.2",
+    "react-parallax-tilt": "^1.7.77",
     "react-query": "^3.39.2",
     "sharp": "^0.31.2",
     "smartcrop-sharp": "^2.0.6",
@@ -52,6 +53,7 @@
     "superjson": "^1.12.0",
     "typescript": "4.9.3",
     "uniqid": "^5.4.0",
+    "url-slug": "^3.0.4",
     "windups": "^1.2.1"
   },
   "devDependencies": {
