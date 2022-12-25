@@ -34,7 +34,7 @@ const Hero = () => {
               fontSize={{ base: "2.6rem", sm: "4rem" }}
               fontWeight="black"
             >
-              Your AI avatars Studio
+              Your AI avatar generator
             </Box>
             <Box
               as="h2"
@@ -42,8 +42,8 @@ const Hero = () => {
               fontSize={{ base: "xl", sm: "3xl" }}
               lineHeight={{ base: "xl", sm: "3xl" }}
             >
-              <b>Unleash your creativity</b> and become{" "}
-              <b>a digital masterpiece</b>
+              <b>Generate avatars</b> that perfectly capture{" "}
+              <b>your unique style</b>
             </Box>
           </Box>
           <Button

@@ -61,10 +61,10 @@ const PromptPage = ({
             fontSize={{ base: "2xl", md: "3xl" }}
             as="h1"
           >
-            {prompt?.label} prompt
+            {prompt?.label} avatar prompt
           </Text>
           <Text fontSize={{ base: "md", md: "xl" }} as="h2">
-            Become the {prompt?.label} with our free prompt
+            Become the {prompt?.label} with our free AI prompt
           </Text>
         </VStack>
         <Flex
@@ -103,7 +103,7 @@ const PromptPage = ({
       </Flex>
       <VStack alignItems="flex-start" overflow="hidden" my={10}>
         <Text fontWeight="bold" fontSize="2xl">
-          More Prompts
+          More AI Prompts
         </Text>
         <SimpleGrid
           columns={{ base: 2, sm: 3, md: 4, lg: 5 }}

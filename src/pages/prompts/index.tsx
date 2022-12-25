@@ -10,9 +10,9 @@ import Link from "next/link";
 import { useState } from "react";
 import { BsArrowRight } from "react-icons/bs";
 
-const title = "Prompts Inspiration";
+const title = "AI Prompts Inspiration";
 export const description =
-  "Our free prompt covers a wide range of themes and topics to help you create a unique and accurate representation of yourself. Use theme with our Studio or your Stable Diffusion or Dreambooth models.";
+  "Our free AI prompt covers a wide range of themes and topics to help you create a unique avatar. Use theme with our Studio or your Stable Diffusion or Dreambooth models.";
 
 const Prompts = () => {
   const [character, setCharacter] = useState<TCharacter>("romy");
