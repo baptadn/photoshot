@@ -63,7 +63,11 @@ export default function Footer() {
           <SocialButton href="mailto:support@photoshot.app">
             <MdAlternateEmail />
           </SocialButton>
-          <Text fontSize="lg" fontWeight="bold">
+          <Text
+            display={{ base: "none", sm: "block" }}
+            fontSize="lg"
+            fontWeight="bold"
+          >
             Photoshot.
           </Text>
         </Stack>

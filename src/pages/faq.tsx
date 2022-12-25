@@ -1,5 +1,6 @@
 import PageContainer from "@/components/layout/PageContainer";
-import { Link, List, ListItem, Text, VStack } from "@chakra-ui/react";
+import { Text, VStack } from "@chakra-ui/react";
+import Link from "next/link";
 import React from "react";
 
 const Terms = () => {
@@ -73,10 +74,16 @@ const Terms = () => {
           any of the data or content associated with your account.
         </Text>
         <Text>
-          Please be aware that only the data on Photoshot servers will be 
+          Please be aware that only the data on Photoshot servers will be
           deleted. Data that was transmitted to Replicate will not be deleted.
-          You would have to contact them in order to do so, according to their 
+          You would have to contact them in order to do so, according to their{" "}
           <Link href="https://replicate.com/privacy">Terms of Service</Link>.
+        </Text>
+        <Text fontWeight="bold" fontSize="xl">
+          ❓ How it works?
+        </Text>
+        <Text>
+          See <Link href="/how-it-works">this page</Link>
         </Text>
       </VStack>
     </PageContainer>

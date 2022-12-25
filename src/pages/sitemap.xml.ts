@@ -16,8 +16,11 @@ function generateSiteMap(prompts: TPrompt[]) {
       <url>
        <loc>https://photoshot.app/faq</loc>
      </url>
-       <url>
+     <url>
        <loc>https://photoshot.app/prompts</loc>
+     </url>
+     <url>
+       <loc>https://photoshot.app/how-it-works</loc>
      </url>
      ${prompts
        .map(({ slug }) => {
