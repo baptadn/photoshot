@@ -22,7 +22,7 @@ const Header = () => {
       flexDirection="column"
       marginX="auto"
       maxWidth="container.lg"
-      px={6}
+      px="2"
     >
       <Flex justifyContent="space-between" py={4} as="footer">
         <Flex
@@ -40,40 +40,51 @@ const Header = () => {
           />
           <Text display={{ base: "none", sm: "inherit" }}>Photoshot.</Text>
         </Flex>
-        {session ? (
-          <HStack>
-            <Button href="/dashboard" as={Link} variant="brand" size="sm">
-              Dashboard
-            </Button>
-            <Tooltip hasArrow label="Public gallery">
-              <Button
-                href={`/gallery/${session.userId}`}
-                as={Link}
-                variant="outline"
-                size="sm"
-                _hover={{ bg: "brand.500" }}
-              >
-                My Gallery
-              </Button>
-            </Tooltip>
-            <Tooltip hasArrow label="Logout">
-              <IconButton
-                aria-label="logout"
-                icon={<HiLogout />}
-                size="sm"
-                colorScheme="beige"
-                variant="ghost"
-                onClick={() => {
-                  signOut({ callbackUrl: "/" });
-                }}
-              />
-            </Tooltip>
-          </HStack>
-        ) : (
-          <Button href="/login" as={Link} variant="brand" size="sm">
-            Login
+        <HStack spacing={1}>
+          <Button
+            as={Link}
+            href="/prompts"
+            colorScheme="beige"
+            variant="ghost"
+            size="sm"
+          >
+            Prompts
           </Button>
-        )}
+          {session ? (
+            <>
+              <Tooltip hasArrow label="Public gallery">
+                <Button
+                  href={`/gallery/${session.userId}`}
+                  as={Link}
+                  colorScheme="beige"
+                  variant="ghost"
+                  size="sm"
+                >
+                  My Gallery
+                </Button>
+              </Tooltip>
+              <Button href="/dashboard" as={Link} variant="brand" size="sm">
+                Dashboard
+              </Button>
+              <Tooltip hasArrow label="Logout">
+                <IconButton
+                  aria-label="logout"
+                  icon={<HiLogout />}
+                  size="sm"
+                  colorScheme="beige"
+                  variant="ghost"
+                  onClick={() => {
+                    signOut({ callbackUrl: "/" });
+                  }}
+                />
+              </Tooltip>
+            </>
+          ) : (
+            <Button href="/login" as={Link} variant="brand" size="sm">
+              Login
+            </Button>
+          )}
+        </HStack>
       </Flex>
     </Flex>
   );

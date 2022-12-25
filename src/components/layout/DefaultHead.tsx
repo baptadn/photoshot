@@ -1,15 +1,16 @@
 import Head from "next/head";
 import React from "react";
 
-const description = "Create awesome AI avatars";
-const title = "Photoshot - AI Avatar generator";
+const title = "Generate Custom AI-Generated Profile Pictures with Photoshot";
+const description =
+  "Custom AI-generated profile pictures that perfectly capture your unique style. Write a prompt and let our Dreambooth and Stable diffusion technology do the rest.";
 const image = "https://photoshot.app/og-cover.jpg";
 
 const DefaultHead = () => (
   <Head>
-    <link rel="shortcut icon" href="/favicon.png" />
     <title>{title}</title>
-    <meta name="description" content="" />
+    <link rel="shortcut icon" href="/favicon.png" />
+    <meta name="description" content={description} />
     <meta charSet="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta itemProp="image" content={image} />

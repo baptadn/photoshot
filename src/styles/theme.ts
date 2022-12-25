@@ -1,3 +1,4 @@
+import { inter } from "@/pages/_app";
 import { extendTheme } from "@chakra-ui/react";
 
 const theme = extendTheme({
@@ -35,8 +36,8 @@ const theme = extendTheme({
     },
   },
   fonts: {
-    heading: `'Inter', sans-serif`,
-    body: `'Inter', sans-serif`,
+    heading: `'${inter.style.fontFamily}', sans-serif`,
+    body: `'${inter.style.fontFamily}', sans-serif`,
   },
   components: {
     Button: {
