@@ -18,6 +18,7 @@ import { BsLightbulb } from "react-icons/bs";
 import { FaCameraRetro } from "react-icons/fa";
 import { useMutation } from "react-query";
 import PomptWizardPopover from "./PomptWizardPopover";
+import PromptsDrawer from "./PromptsDrawer";
 
 const PromptPanel = () => {
   const {
@@ -75,9 +76,10 @@ const PromptPanel = () => {
           />
         </Text>
       </Flex>
-      <Box mt={2}>
+      <HStack mt={2}>
+        <PromptsDrawer />
         <PomptWizardPopover />
-      </Box>
+      </HStack>
       <Flex
         flexDirection={{ base: "column", md: "row" }}
         gap={{ base: 4, md: 2 }}

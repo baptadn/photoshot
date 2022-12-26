@@ -52,9 +52,6 @@ const PomptWizardPopover = () => {
         size="sm"
         onClick={onOpen}
       >
-        <Badge colorScheme="yellow" mr={1}>
-          New
-        </Badge>
         Prompt Wizard
       </Button>
 
