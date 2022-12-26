@@ -63,6 +63,7 @@ const Demo = () => {
             shadow="2xl"
             borderRadius="3xl"
             width="14rem"
+            height="14rem"
             zIndex={10}
             alt={prompt.label}
             src={`/prompts/${names[index]}/${urlSlug(prompt.label, {
