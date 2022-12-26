@@ -34,6 +34,7 @@
     "framer-motion": "^7.6.19",
     "image-blob-reduce": "^4.1.0",
     "jszip": "^3.10.1",
+    "keen-slider": "^6.8.5",
     "next": "13.0.6",
     "next-auth": "^4.18.0",
     "next-s3-upload": "^0.2.8",

@@ -14,7 +14,7 @@ import { HiLogout } from "react-icons/hi";
 import { IoIosFlash } from "react-icons/io";
 
 const Header = () => {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
 
   return (
     <Flex
@@ -80,7 +80,13 @@ const Header = () => {
               </Tooltip>
             </>
           ) : (
-            <Button href="/login" as={Link} variant="brand" size="sm">
+            <Button
+              isLoading={status === "loading"}
+              href="/login"
+              as={Link}
+              variant="brand"
+              size="sm"
+            >
               Login
             </Button>
           )}

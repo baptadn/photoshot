@@ -76,7 +76,7 @@ const FormPayment = ({
               <b>1</b> Studio with a <b>custom trained model</b>
             </CheckedListItem>
             <CheckedListItem>
-              <b>{process.env.NEXT_PUBLIC_STUDIO_SHOT_AMOUNT}</b> images
+              <b>{process.env.NEXT_PUBLIC_STUDIO_SHOT_AMOUNT}</b> avatars
               generation (512x512 resolution)
             </CheckedListItem>
             <CheckedListItem>
