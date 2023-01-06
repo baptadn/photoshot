@@ -23,6 +23,7 @@ import { useS3Upload } from "next-s3-upload";
 import { useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { MdCheckCircle, MdCloud } from "react-icons/md";
+import { IoIosClose } from "react-icons/io";
 import { useMutation } from "react-query";
 import AvatarsPlaceholder from "../home/AvatarsPlaceholder";
 import { CheckedListItem } from "../home/Pricing";
@@ -84,6 +85,17 @@ const Uploader = ({ handleOnAdd }: { handleOnAdd: () => void }) => {
   });
 
   const handleUpload = async () => {
+    if (files.length < 5) {
+      toast({
+        title: "You need to upload at least 5 photos",
+        duration: 3000,
+        isClosable: true,
+        position: "top-right",
+        status: "error",
+      });
+      return;
+    }
+
     const filesToUpload = Array.from(files);
     setUploadState("uploading");
 
@@ -197,7 +209,7 @@ const Uploader = ({ handleOnAdd }: { handleOnAdd: () => void }) => {
             key={file.name}
           >
             <Center top={-2} right={-2} position="absolute">
-              {uploadState == "uploading" && !urls[index] && (
+              {uploadState === "uploading" && !urls[index] && (
                 <Spinner
                   size="lg"
                   thickness="8px"
@@ -205,6 +217,20 @@ const Uploader = ({ handleOnAdd }: { handleOnAdd: () => void }) => {
                   color="brand.500"
                 />
               )}
+
+              {uploadState !== "uploading" && !urls[index] && (
+                <Icon
+                  cursor="pointer"
+                  onClick={() => {
+                    setFiles(files.filter((_, i) => i !== index));
+                  }}
+                  borderRadius="full"
+                  backgroundColor="brand.500"
+                  as={IoIosClose}
+                  fontSize="2rem"
+                />
+              )}
+
               {urls[index] && (
                 <Icon
                   borderRadius="full"
@@ -241,7 +267,9 @@ const Uploader = ({ handleOnAdd }: { handleOnAdd: () => void }) => {
             onClick={handleUpload}
             variant="brand"
           >
-            Upload {files.length} image{files.length > 1 && "s"}
+            {files.length < 5
+              ? "Upload (min 5 photos)"
+              : `Upload ${files.length} photo${files.length > 1 && "s"}`}
           </Button>
         </Box>
       )}
