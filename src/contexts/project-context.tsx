@@ -1,5 +1,5 @@
 import { IStudioPageProps } from "@/pages/studio/[id]";
-import { Project, Shot } from "@prisma/client";
+import { Shot } from "@prisma/client";
 import axios from "axios";
 import { createContext, ReactNode, RefObject, useRef, useState } from "react";
 import { useQuery } from "react-query";
@@ -20,6 +20,8 @@ export const ProjectContext = createContext<{
   updateShotTemplate: (shot: Shot | undefined) => void;
   fetchShots: () => void;
   promptInputRef: RefObject<HTMLTextAreaElement>;
+  promptImageUrl: string | undefined;
+  setPromptImageUrl: (promptImage: string | undefined) => void;
 }>(null!);
 
 export const ProjectProvider = ({
@@ -32,6 +34,7 @@ export const ProjectProvider = ({
   const promptInputRef = useRef<HTMLTextAreaElement>(null);
   const [shots, setShots] = useState(project.shots);
   const [shotTemplate, setShotTemplate] = useState<Shot>();
+  const [promptImageUrl, setPromptImageUrl] = useState<string>();
   const [skip, setSkip] = useState(PROJECTS_PER_PAGE);
   const [hasMoreResult, setHasMoreResult] = useState(
     project.shots.length < project._count.shots
@@ -104,6 +107,8 @@ export const ProjectProvider = ({
         promptInputRef,
         promptWizardCredits,
         updatePromptWizardCredits,
+        promptImageUrl,
+        setPromptImageUrl,
       }}
     >
       {children}

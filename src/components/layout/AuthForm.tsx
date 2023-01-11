@@ -1,32 +1,55 @@
+import { getEmailProvider } from "@/core/utils/mail";
 import {
   Box,
   Button,
   FormControl,
   FormLabel,
+  Heading,
+  Icon,
   Input,
+  Link,
   Stack,
   Text,
 } from "@chakra-ui/react";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/router";
 import { useState } from "react";
 import { FaPaperPlane } from "react-icons/fa";
+import { MdCheckCircleOutline } from "react-icons/md";
 import { useMutation } from "react-query";
 
 export default function AuthForm() {
   const [email, setEmail] = useState("");
-  const router = useRouter();
-
-  const { mutate: login, isLoading } = useMutation(
-    "login",
-    () =>
-      signIn("email", { email, redirect: false, callbackUrl: "/dashboard" }),
-    {
-      onSuccess: () => {
-        router.push("/login?verifyRequest=1");
-      },
-    }
+  const {
+    mutate: login,
+    isLoading,
+    isSuccess,
+  } = useMutation("login", () =>
+    signIn("email", { email, redirect: false, callbackUrl: "/dashboard" })
   );
+
+  if (isSuccess) {
+    const { name, url } = getEmailProvider(email);
+
+    return (
+      <Box mx={{ base: 4, md: 0 }} textAlign="center">
+        <Heading>
+          Check your email <Icon mb="-4px" as={MdCheckCircleOutline} />
+        </Heading>
+        <Text maxWidth="30rem" mt={3} fontSize="2xl">
+          A <b>sign in link</b> has been sent to your email address.{" "}
+          {name && url && (
+            <>
+              Check{" "}
+              <Link textDecoration="underline" isExternal href={url}>
+                your {name} inbox
+              </Link>
+              .
+            </>
+          )}
+        </Text>
+      </Box>
+    );
+  }
 
   return (
     <Stack spacing={4} width="100%" mx="auto" maxW="md" py={12} px={6}>

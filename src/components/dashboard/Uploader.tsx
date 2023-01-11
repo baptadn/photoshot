@@ -1,4 +1,4 @@
-import { resizeImage } from "@/core/utils/upload";
+import { createPreviewMedia, resizeImage } from "@/core/utils/upload";
 import {
   Box,
   Button,
@@ -30,11 +30,12 @@ import { CheckedListItem } from "../home/Pricing";
 import UploadErrorMessages from "./UploadErrorMessages";
 
 type TUploadState = "not_uploaded" | "uploading" | "uploaded";
+export type FilePreview = (File | Blob) & { preview: string };
 
 const MAX_FILES = 25;
 
 const Uploader = ({ handleOnAdd }: { handleOnAdd: () => void }) => {
-  const [files, setFiles] = useState<(File & { preview: string })[]>([]);
+  const [files, setFiles] = useState<FilePreview[]>([]);
   const [uploadState, setUploadState] = useState<TUploadState>("not_uploaded");
   const [errorMessages, setErrorMessages] = useState<string[]>([]);
   const [urls, setUrls] = useState<string[]>([]);
@@ -74,11 +75,7 @@ const Uploader = ({ handleOnAdd }: { handleOnAdd: () => void }) => {
         setErrorMessages([]);
         setFiles([
           ...files,
-          ...acceptedFiles.map((file) =>
-            Object.assign(file, {
-              preview: URL.createObjectURL(file),
-            })
-          ),
+          ...acceptedFiles.map((file) => createPreviewMedia(file)),
         ]);
       }
     },
