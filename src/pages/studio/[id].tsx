@@ -2,6 +2,7 @@ import PageContainer from "@/components/layout/PageContainer";
 import PromptPanel from "@/components/projects/PromptPanel";
 import ShotsList from "@/components/projects/shot/ShotsList";
 import ProjectProvider, { PROJECTS_PER_PAGE } from "@/contexts/project-context";
+import replicateClient from "@/core/clients/replicate";
 import db from "@/core/db";
 import { Box, Button } from "@chakra-ui/react";
 import { Project, Shot } from "@prisma/client";
@@ -17,9 +18,10 @@ export type ProjectWithShots = Project & {
 
 export interface IStudioPageProps {
   project: ProjectWithShots & { _count: { shots: number } };
+  hasImageInputAvailable: boolean;
 }
 
-const StudioPage = ({ project }: IStudioPageProps) => (
+const StudioPage = ({ project, hasImageInputAvailable }: IStudioPageProps) => (
   <ProjectProvider project={project}>
     <PageContainer>
       <Box mb={4}>
@@ -33,7 +35,7 @@ const StudioPage = ({ project }: IStudioPageProps) => (
           Back to Dashboard
         </Button>
       </Box>
-      <PromptPanel />
+      <PromptPanel hasImageInputAvailable={hasImageInputAvailable} />
       <ShotsList />
     </PageContainer>
   </ProjectProvider>
@@ -73,11 +75,20 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     };
   }
 
+  const { data: model } = await replicateClient.get(
+    `https://api.replicate.com/v1/models/${process.env.REPLICATE_USERNAME}/${project.id}/versions/${project.modelVersionId}`
+  );
+
+  const hasImageInputAvailable = Boolean(
+    model.openapi_schema?.components?.schemas?.Input?.properties?.image?.title
+  );
+
   const { json: serializedProject } = superjson.serialize(project);
 
   return {
     props: {
       project: serializedProject,
+      hasImageInputAvailable,
     },
   };
 }

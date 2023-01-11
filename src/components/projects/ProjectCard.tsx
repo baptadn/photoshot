@@ -74,7 +74,7 @@ const ProjectCard = ({
                 <Badge colorScheme="teal">{project.credits} shots left</Badge>
               )}
             </Text>
-            <Text textTransform="capitalize" fontSize="sm">
+            <Text textTransform="capitalize" fontSize="sm" color="beige.500">
               {formatRelative(new Date(project.createdAt), new Date())}
             </Text>
           </Box>

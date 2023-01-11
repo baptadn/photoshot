@@ -2333,6 +2333,13 @@ acorn@^8.8.0:
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-8.8.1.tgz#0a3f9cbecc4ec3bea6f0a80b66ae8dd2da250b73"
   integrity sha512-7zFpHzhnqYKrkYdUjF1HI1bzd0VygEGX8lFk4k5zVMqHEoES+P+7TKI+EvLO9WVMJ8eekdO0aDEK044xTXwPPA==
 
+advanced-cropper@~0.17.0:
+  version "0.17.0"
+  resolved "https://registry.yarnpkg.com/advanced-cropper/-/advanced-cropper-0.17.0.tgz#bfd003d9836c195905c628aca07a237a998d427d"
+  integrity sha512-j/V8p5MSkE5JZcw5qACR2L2OhBaoUZW6+wsJyA8qfUhNLX3AiEuBWMTI+A6gUCbol7PrEaGQEzayK4qcuLLyMQ==
+  dependencies:
+    tslib "^2.4.0"
+
 ajv@^6.10.0, ajv@^6.12.4:
   version "6.12.6"
   resolved "https://registry.yarnpkg.com/ajv/-/ajv-6.12.6.tgz#baf5a62e802b07d977034586f8c3baf5adf26df4"
@@ -2602,6 +2609,11 @@ chownr@^1.1.1:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/chownr/-/chownr-1.1.4.tgz#6fc9d7b42d32a583596337666e7d08084da2cc6b"
   integrity sha512-jJ0bqzaylmJtVnNgzTeSOs8DPavpbYgEr/b0YL8/2GO3xJEhInFmhKMUnEJQjZumK7KXGFhUy89PrsJWlakBVg==
+
+classnames@^2.2.6:
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.3.2.tgz#351d813bf0137fcc6a76a16b88208d2560a0d924"
+  integrity sha512-CSbhY4cFEJRe6/GQzIk5qXZ4Jeg5pcsP7b5peFSDpffpe1cqjASH/n9UTjBwOp6XpMSTwQ8Za2K5V02ueA7Tmw==
 
 client-only@0.0.1:
   version "0.0.1"
@@ -4396,6 +4408,15 @@ rc@^1.2.7:
     ini "~1.3.0"
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
+
+react-advanced-cropper@^0.17.0:
+  version "0.17.0"
+  resolved "https://registry.yarnpkg.com/react-advanced-cropper/-/react-advanced-cropper-0.17.0.tgz#f422fa6bbee340970a023459fae4947b0aed0cd3"
+  integrity sha512-OMvAzGuu7V0Txe5ljePIGESc846YLNSyzm/F1QmhtNUb0uzJ4ijlu3TniVSCEdX1A1dbIT7lR/fVPG+jEEMSUQ==
+  dependencies:
+    advanced-cropper "~0.17.0"
+    classnames "^2.2.6"
+    tslib "^2.4.0"
 
 react-clientside-effect@^1.2.6:
   version "1.2.6"

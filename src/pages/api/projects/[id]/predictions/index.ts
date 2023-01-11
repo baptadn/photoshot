@@ -7,6 +7,7 @@ import { getSession } from "next-auth/react";
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const prompt = req.body.prompt as string;
   const seed = req.body.seed as number;
+  const image = req.body.image as string;
 
   const projectId = req.query.id as string;
   const session = await getSession({ req });
@@ -29,6 +30,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       input: {
         prompt: replacePromptToken(prompt, project),
         negative_prompt: process.env.REPLICATE_NEGATIVE_PROMPT,
+        ...(image && { image }),
         ...(seed && { seed }),
       },
       version: project.modelVersionId,

@@ -5,12 +5,14 @@ import {
   Center,
   Flex,
   HStack,
+  Icon,
   IconButton,
   Link,
   Spinner,
   Text,
   Tooltip,
   useClipboard,
+  VStack,
 } from "@chakra-ui/react";
 import { Shot } from "@prisma/client";
 import axios from "axios";
@@ -23,6 +25,7 @@ import { IoMdCheckmarkCircleOutline } from "react-icons/io";
 import { MdOutlineModelTraining } from "react-icons/md";
 import { useMutation, useQuery } from "react-query";
 import ShotImage from "./ShotImage";
+import { TbFaceIdError } from "react-icons/tb";
 
 const ShotCard = ({
   shot: initialShot,
@@ -83,9 +86,20 @@ const ShotCard = ({
       ) : (
         <Box>
           <AspectRatio ratio={1}>
-            <Center backgroundColor="gray.100" width="100%">
-              <Spinner size="xl" speed="2s" color="gray.400" />
-            </Center>
+            {shot.status === "failed" ? (
+              <Center backgroundColor="beige.50" width="100%">
+                <VStack>
+                  <Icon fontSize="3xl" as={TbFaceIdError} />
+                  <Box fontSize="sm" color="blackAlpha.700">
+                    Shot generation failed
+                  </Box>
+                </VStack>
+              </Center>
+            ) : (
+              <Center backgroundColor="gray.100" width="100%">
+                <Spinner size="xl" speed="2s" color="gray.400" />
+              </Center>
+            )}
           </AspectRatio>
         </Box>
       )}
