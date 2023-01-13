@@ -9,7 +9,7 @@ export const getRefinedInstanceClass = (instanceClass: string) => {
 export const extractSeedFromLogs = (logsContent: string) => {
   try {
     const logLines = logsContent.split("\n");
-    const seedLine = logLines[1];
+    const seedLine = logLines[0];
     const seedValue = seedLine.split(":")[1].trim();
 
     return seedValue ? Number(seedValue) : undefined;
