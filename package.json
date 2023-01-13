@@ -35,10 +35,12 @@
     "image-blob-reduce": "^4.1.0",
     "jszip": "^3.10.1",
     "keen-slider": "^6.8.5",
+    "mjml": "^4.13.0",
+    "mjml-react": "^2.0.8",
     "next": "13.0.6",
     "next-auth": "^4.18.0",
     "next-s3-upload": "^0.2.8",
-    "nodemailer": "^6.8.0",
+    "nodemailer": "^6.9.0",
     "openai": "^3.1.0",
     "plaiceholder": "^2.5.0",
     "react": "18.2.0",
@@ -59,6 +61,8 @@
     "windups": "^1.2.1"
   },
   "devDependencies": {
+    "@types/mjml-react": "^2.0.6",
+    "@types/nodemailer": "^6.4.7",
     "@types/sharp": "^0.31.0",
     "dotenv-cli": "^6.0.0",
     "prisma": "^4.7.1"

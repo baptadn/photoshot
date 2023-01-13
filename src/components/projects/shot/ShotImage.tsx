@@ -37,6 +37,7 @@ const ShotImage = ({ shot }: { shot: Shot }) => {
           src={shot.outputUrl!}
           width={512}
           height={512}
+          unoptimized
         />
       </ControlledZoom>
     </Box>
