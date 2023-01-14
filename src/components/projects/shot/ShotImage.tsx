@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import { Controlled as ControlledZoom } from "react-medium-image-zoom";
 
-const ShotImage = ({ shot }: { shot: Shot }) => {
+const ShotImage = ({ shot, isHd = false }: { shot: Shot; isHd?: boolean }) => {
   const { push, query } = useRouter();
   const { onOpen, onClose, isOpen: isZoomed } = useDisclosure();
 
@@ -34,7 +34,7 @@ const ShotImage = ({ shot }: { shot: Shot }) => {
           placeholder="blur"
           blurDataURL={shot.blurhash || "placeholder"}
           alt={shot.prompt}
-          src={shot.outputUrl!}
+          src={isHd ? shot.hdOutputUrl! : shot.outputUrl!}
           width={512}
           height={512}
           unoptimized

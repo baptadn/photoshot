@@ -74,7 +74,7 @@ const Pricing = () => {
             <b>1</b> Studio with a <b>custom trained model</b>
           </CheckedListItem>
           <CheckedListItem>
-            <b>{process.env.NEXT_PUBLIC_STUDIO_SHOT_AMOUNT}</b> avatars
+            <b>{process.env.NEXT_PUBLIC_STUDIO_SHOT_AMOUNT}</b> avatars 4K
             generation
           </CheckedListItem>
           <CheckedListItem>

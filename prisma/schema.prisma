@@ -7,6 +7,12 @@ generator client {
   provider = "prisma-client-js"
 }
 
+enum HdStatus {
+  NO
+  PENDING
+  PROCESSED
+}
+
 model Account {
   id                String  @id @default(cuid())
   userId            String  @map("user_id")
@@ -76,7 +82,7 @@ model Project {
   userId              String?
   shots               Shot[]
   credits             Int       @default(100)
-  promptWizardCredits Int       @default(30)
+  promptWizardCredits Int       @default(20)
   Payment             Payment[]
 }
 
@@ -93,6 +99,9 @@ model Shot {
   bookmarked  Boolean? @default(false)
   blurhash    String?
   seed        Int?
+  hdStatus    HdStatus   @default(NO)
+  hdPredictionId String?
+  hdOutputUrl   String?
 }
 
 model Payment {
