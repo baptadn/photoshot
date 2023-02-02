@@ -21,7 +21,7 @@ export default async function handler(
             currency: "usd",
             unit_amount: Number(process.env.NEXT_PUBLIC_STRIPE_STUDIO_PRICE),
             product_data: {
-              name: "Studio model training + 100 shots",
+              name: `Studio model training + ${process.env.NEXT_PUBLIC_STUDIO_SHOT_AMOUNT} shots`,
             },
           },
           quantity: 1,
