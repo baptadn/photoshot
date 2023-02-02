@@ -67,7 +67,7 @@ SECRET=
 
 // SMTP server and email address to send emails from
 EMAIL_FROM=
-EMAIL_SERVER=smtp://localhost:1080
+EMAIL_SERVER=smtp://localhost:25
 
 // Stripe API key
 STRIPE_SECRET_KEY=
@@ -81,6 +81,12 @@ NEXT_PUBLIC_STUDIO_SHOT_AMOUNT=
 // Prompt wizard
 OPENAI_API_KEY=
 OPENAI_API_SEED_PROMPT=
+```
+
+Please note that if you want to use the provided `docker-compose` setup you have to disable `TLS` in your `.env.local` by adding:
+
+```
+NODE_TLS_REJECT_UNAUTHORIZED = "0"
 ```
 
 Run migrations
