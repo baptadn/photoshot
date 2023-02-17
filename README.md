@@ -1,6 +1,6 @@
-# Photoshot
+# AI.face.co
 
-[![Twitter](https://img.shields.io/twitter/url/https/twitter.com/photoshot_ai.svg?style=social&label=Follow%20%40photoshot_ai)](https://twitter.com/photoshot_ai)
+[![Twitter](https://img.shields.io/twitter/url/https/twitter.com/photoshot_ai.svg?style=social&label=Follow%20%40photoshot_ai)](https://twitter.com/colorvivo)
 
 An open-source AI avatar generator web app
 
@@ -104,3 +104,5 @@ yarn dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+Based on Photoshot opensource app.
