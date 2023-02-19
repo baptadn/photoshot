@@ -55,7 +55,7 @@ export default function AuthForm() {
     <Stack spacing={4} width="100%" mx="auto" maxW="md" py={12} px={6}>
       <Stack textAlign="center" align="center" spacing={0}>
         <Text fontWeight="extrabold" as="h2" fontSize="4xl">
-          Sign in to Photoshot.
+          Sign in to AI.face.co.
         </Text>
         <Text fontSize="lg">Use your email address to sign in</Text>
       </Stack>
