@@ -16,15 +16,15 @@ const Terms = () => {
         alignItems="flex-start"
       >
         <Text fontWeight="bold" fontSize="3xl">
-          Photoshot Privacy Policy
+          AI.face.co Privacy Policy
         </Text>
 
         <Text>
-          It is Photoshot&#39;s policy to respect your privacy and comply with
+          It is AI.face.co&#39;s policy to respect your privacy and comply with
           any applicable law and regulation regarding any personal information
           we may collect about you, including across our website,{" "}
-          <Link textDecoration="underline" href="https://photoshot.app/">
-            https://photoshot.app/
+          <Link textDecoration="underline" href="https://AI.face.co/">
+            https://AI.face.co/
           </Link>
           , and other sites we own and operate.{" "}
         </Text>
@@ -90,7 +90,7 @@ const Terms = () => {
           Collection and Use of Information
         </Text>
         <Text>
-          By accessing and using photoshot, you are also using the Replicate
+          By accessing and using AI.face.co, you are also using the Replicate
           service and thereby accepting the terms of use outlined at
           <Link ml={1} href="https://replicate.com/privacy">
             https://replicate.com/privacy
@@ -178,7 +178,7 @@ const Terms = () => {
         <Text>
           To request that your account and all associated data be deleted,
           please send an email to{" "}
-          <Link href="mailto:support@photoshot">support@photoshot</Link>. Please
+          <Link href="mailto:info@colorvivo.com">info@colorvivo.com</Link>. Please
           note that by deleting your account, you will no longer have access to
           any of the data or content associated with your account.
         </Text>
@@ -325,7 +325,7 @@ const Terms = () => {
         <Text>
           For any questions or concerns regarding your privacy, you may contact
           us using the following details:{" "}
-          <Link href="mailto:support@photoshot.app">support@photoshot.app</Link>
+          <Link href="mailto:info@colorvivo.com">info@colorvivo.com</Link>
         </Text>
       </VStack>
     </PageContainer>
