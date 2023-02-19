@@ -1,10 +1,10 @@
 import Head from "next/head";
 import React from "react";
 
-const title = "Generate Custom AI avatar - Photoshot";
+const title = "Generate Custom AI avatar - AI.face.co";
 const description =
   "Generate AI avatars that perfectly capture your unique style. Write a prompt and let our Dreambooth and Stable diffusion technology do the rest.";
-const image = "https://photoshot.app/og-cover.jpg";
+const image = "https://AI.face.co/og-cover.jpg";
 
 const DefaultHead = () => (
   <Head>
@@ -20,8 +20,8 @@ const DefaultHead = () => (
     <meta property="og:image" content={image} />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@shinework" />
-    <meta name="twitter:creator" content="@shinework" />
+    <meta name="twitter:site" content="@colorvivo" />
+    <meta name="twitter:creator" content="@colorvivo" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={image} />
