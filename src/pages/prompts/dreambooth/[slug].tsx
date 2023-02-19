@@ -32,7 +32,7 @@ const PromptPage = ({
   return (
     <PageContainer>
       <Head>
-        <title>{`Free prompt ${prompt.label} - Photoshot`}</title>
+        <title>{`Free prompt ${prompt.label} - AI.face.co`}</title>
         <meta name="description" content={description} key="description" />
       </Head>
       <Box mb={4}>
