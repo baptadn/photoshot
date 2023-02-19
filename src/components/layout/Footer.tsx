@@ -57,10 +57,10 @@ export default function Footer() {
           <SocialButton href="https://github.com/shinework/photoshot">
             <FaGithub />
           </SocialButton>
-          <SocialButton href="https://twitter.com/photoshot_ai">
+          <SocialButton href="https://twitter.com/colorvivo">
             <FaTwitter />
           </SocialButton>
-          <SocialButton href="mailto:support@photoshot.app">
+          <SocialButton href="mailto:info@colorvivo.com">
             <MdAlternateEmail />
           </SocialButton>
           <Text
