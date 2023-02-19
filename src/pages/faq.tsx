@@ -69,12 +69,12 @@ const Terms = () => {
         <Text>
           To request that your account and all associated data be deleted,
           please send an email to{" "}
-          <Link href="mailto:support@photoshot">support@photoshot</Link>. Please
+          <Link href="mailto:info@colorvivo.com">info@colorvivo.com</Link>. Please
           note that by deleting your account, you will no longer have access to
           any of the data or content associated with your account.
         </Text>
         <Text>
-          Please be aware that only the data on Photoshot servers will be
+          Please be aware that only the data on AI.face.co servers will be
           deleted. Data that was transmitted to Replicate will not be deleted.
           You would have to contact them in order to do so, according to their{" "}
           <Link href="https://replicate.com/privacy">Terms of Service</Link>.
