@@ -20,7 +20,7 @@ const Prompts = () => {
   return (
     <PageContainer>
       <Head>
-        <title>{title} - Photoshot</title>
+        <title>{title} - AI.face.co</title>
         <meta name="description" content={description} />
       </Head>
       <VStack
