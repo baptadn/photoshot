@@ -40,48 +40,29 @@ cp .env.example .env.local
 
 Update environment variable values:
 
-```
-// Database connection string of your database (postgresql here)
-DATABASE_URL=postgresql://photoshot:photoshot@localhost:5432/photoshot
-// https://next-auth.js.org/configuration/options#nextauth_url
-NEXTAUTH_URL=http://localhost:3000
+| Environment Variable                 | Explanation                                                                                                                                                                     |
+|--------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| DATABASE_URL                         | The connection string for your PostgreSQL database. It will be `postgresql://photoshot:photoshot@localhost:5432/photoshot` if you are using the provided docket setup.          |
+| NEXTAUTH_URL                         | The URL of your Next.js application, used for authentication purposes with NextAuth.js.                                                                                         |
+| S3_UPLOAD_KEY                        | The access key for your AWS S3 bucket used for storing pictures.                                                                                                                |
+| S3_UPLOAD_SECRET                     | The secret key for your AWS S3 bucket used for storing pictures.                                                                                                                |
+| S3_UPLOAD_BUCKET                     | The name of your AWS S3 bucket used for storing pictures.                                                                                                                       |
+| S3_UPLOAD_REGION                     | The AWS region where your S3 bucket is located.                                                                                                                                 |
+| REPLICATE_API_TOKEN                  | The [API token](https://replicate.com/account) for Replicate.                                                                                                                   |
+| REPLICATE_USERNAME                   | The username associated with your Replicate account.                                                                                                                            |
+| REPLICATE_MAX_TRAIN_STEPS            | The maximum number of training steps for the Dreambooth AI model. Defaults to `3000`.                                                                                           |
+| REPLICATE_NEGATIVE_PROMPT            | A prompt used for negative training examples in the Replicate AI model. Defualts to `cropped face, cover face, cover visage, mutated hands`                                     |
+| REPLICATE_HD_VERSION_MODEL_ID        | The version of the model for upscaling the generated images. Such models can be browsed [here](https://replicate.com/collections/super-resolution)                              |
+| NEXT_PUBLIC_REPLICATE_INSTANCE_TOKEN | A unique identifier for the training data. It can be any string. For best results use an identifier containing three Unicode characters, without spaces e.g. `cjw`              |
+| SECRET                               | A random string used for NextAuth.js authentication.                                                                                                                            |
+| EMAIL_FROM                           | The email address from which emails will be sent.                                                                                                                               |
+| EMAIL_SERVER                         | The SMTP server URL used for sending emails. It will be `http://localhost:25` if you are using the provided docker setup,                                                       |
+| STRIPE_SECRET_KEY                    | The API key for your Stripe account.                                                                                                                                            |
+| NEXT_PUBLIC_STRIPE_STUDIO_PRICE      | The price of a studio in cents (e.g., 1000 = $10).                                                                                                                              |
+| NEXT_PUBLIC_STUDIO_SHOT_AMOUNT       | The maximum number of shots allowed per studio.                                                                                                                                 |
+| OPENAI_API_KEY                       | The API key for the OpenAI API, used for the prompt wizard feature.                                                                                                             |
+| OPENAI_API_SEED_PROMPT               | A seed prompt used for generating style prompts using the OpenAI API.                                                                                                           |
 
-// AWS S3 bucket info (for storing pictures)
-S3_UPLOAD_KEY=
-S3_UPLOAD_SECRET=
-S3_UPLOAD_BUCKET=
-S3_UPLOAD_REGION=
-
-// Replicate API token / username
-REPLICATE_API_TOKEN=
-REPLICATE_USERNAME=
-REPLICATE_MAX_TRAIN_STEPS=3000
-REPLICATE_NEGATIVE_PROMPT=
-REPLICATE_HD_VERSION_MODEL_ID=
-
-// Replicate instance token (should be rare)
-NEXT_PUBLIC_REPLICATE_INSTANCE_TOKEN=
-
-// Random secret for NextAuth
-SECRET=
-
-// SMTP server and email address to send emails from
-EMAIL_FROM=
-EMAIL_SERVER=smtp://localhost:25
-
-// Stripe API key
-STRIPE_SECRET_KEY=
-
-// Price of a studio in cents (ie: 1000 = $10)
-NEXT_PUBLIC_STRIPE_STUDIO_PRICE=
-
-// Amount of allowed shots per studio
-NEXT_PUBLIC_STUDIO_SHOT_AMOUNT=
-
-// Prompt wizard
-OPENAI_API_KEY=
-OPENAI_API_SEED_PROMPT=
-```
 
 Please note that if you want to use the provided `docker-compose` setup you have to disable `TLS` in your `.env.local` by adding:
 
