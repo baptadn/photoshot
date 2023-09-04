@@ -29,7 +29,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     {
       input: {
         prompt: replacePromptToken(prompt, project),
-        negative_prompt: process.env.REPLICATE_NEGATIVE_PROMPT,
+        negative_prompt: process.env.REPLICATE_NEGATIVE_PROMPT || "cropped face, cover face, cover visage, mutated hands",
         ...(image && { image }),
         ...(seed && { seed }),
       },
