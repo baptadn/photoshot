@@ -41,7 +41,7 @@ const Features = () => {
             angles
           </Item>
           <Item iconName="square.svg" title="2. Wait">
-            Take a coffee while we build <b>your studio</b> based on your photos
+            Take a coffee break while we build <b>your studio</b> based on your photos
           </Item>
           <Item iconName="preview.svg" title="3. Prompt">
             Use your imagination to craft the <b>perfect prompt!</b>
