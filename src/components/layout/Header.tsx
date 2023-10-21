@@ -7,15 +7,13 @@ import {
   Text,
   Tooltip,
 } from "@chakra-ui/react";
-import { signOut, useSession } from "next-auth/react";
+import { Session } from "next-auth";
+import { signOut } from "next-auth/react";
 import Link from "next/link";
-import React from "react";
 import { HiLogout } from "react-icons/hi";
 import { IoIosFlash } from "react-icons/io";
 
-const Header = () => {
-  const { data: session, status } = useSession();
-
+const Header = ({ session }: { session: Session | null }) => {
   return (
     <Flex
       width="100%"
@@ -80,13 +78,7 @@ const Header = () => {
               </Tooltip>
             </>
           ) : (
-            <Button
-              isLoading={status === "loading"}
-              href="/login"
-              as={Link}
-              variant="brand"
-              size="sm"
-            >
+            <Button href="/login" as={Link} variant="brand" size="sm">
               Login
             </Button>
           )}

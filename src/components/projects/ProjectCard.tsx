@@ -1,5 +1,4 @@
 import { getRefinedStudioName } from "@/core/utils/projects";
-import { ProjectWithShots } from "@/pages/studio/[id]";
 import {
   Avatar,
   AvatarGroup,
@@ -19,6 +18,7 @@ import Link from "next/link";
 import { HiArrowRight } from "react-icons/hi";
 import { IoIosFlash } from "react-icons/io";
 import { useMutation } from "react-query";
+import { ProjectWithShots } from "../pages/StudioPage";
 import FormPayment from "./FormPayment";
 import ProjectDeleteButton from "./ProjectDeleteButton";
 
@@ -54,6 +54,7 @@ const ProjectCard = ({
   const isTraining =
     project.modelStatus === "processing" ||
     project.modelStatus === "pushing" ||
+    project.modelStatus === "starting" ||
     project.modelStatus === "queued";
 
   return (
@@ -125,11 +126,11 @@ const ProjectCard = ({
         {isReady && (
           <Center overflow="hidden" width="100%" marginX="auto">
             <VStack spacing={7}>
-              {!project.shots ? (
-                <Box fontSize="lg">
-                  {`You don't have any prompt yet`}.{" "}
+              {!project.shots.length ? (
+                <VStack spacing={0}>
+                  <span>{`You don't have any prompt yet`}.</span>
                   <b>Go to your studio to add one !</b>
-                </Box>
+                </VStack>
               ) : (
                 <AvatarGroup size="xl" max={10}>
                   {project.shots

@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from "react";
 import {
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
   Button,
   HStack,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
   Text,
 } from "@chakra-ui/react";
-import { useRouter } from "next/router";
-import { useQuery } from "react-query";
 import axios from "axios";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 import { BsChevronDown } from "react-icons/bs";
 import { IoIosFlash } from "react-icons/io";
+import { useQuery } from "react-query";
 
 const BuyShotButton = ({
   credits,
@@ -21,13 +21,18 @@ const BuyShotButton = ({
   credits: number;
   onPaymentSuccess: (credits: number, promptWizardCredits: number) => void;
 }) => {
-  const { push, query } = useRouter();
+  const { push } = useRouter();
+  const searchParams = useSearchParams();
+  const { id: projectId } = useParams() as { id: string };
+
+  const ppi = searchParams!.get("ppi");
+  const sessionId = searchParams!.get("session_id");
+
   const [waitingPayment, setWaitingPayment] = useState(false);
 
   const { isLoading } = useQuery(
     "check-shot-payment",
-    () =>
-      axios.get(`/api/checkout/check/${query.ppi}/${query.session_id}/shot`),
+    () => axios.get(`/api/checkout/check/${ppi}/${sessionId}/shot`),
     {
       cacheTime: 0,
       refetchInterval: 4,
@@ -44,11 +49,11 @@ const BuyShotButton = ({
   );
 
   useEffect(() => {
-    setWaitingPayment(query.ppi === query.id);
-  }, [query]);
+    setWaitingPayment(ppi === projectId);
+  }, [ppi, projectId]);
 
   const handleShotPayment = (quantity: number) => {
-    push(`/api/checkout/shots?quantity=${quantity}&ppi=${query.id}`);
+    push(`/api/checkout/shots?quantity=${quantity}&ppi=${projectId}`);
   };
 
   return (

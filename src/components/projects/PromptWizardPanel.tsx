@@ -1,13 +1,14 @@
 import useProjectContext from "@/hooks/use-project-context";
 import { Button, Input, Text, VStack } from "@chakra-ui/react";
 import axios from "axios";
-import { useRouter } from "next/router";
+import { useParams } from "next/navigation";
 import { useState } from "react";
 import { FaMagic } from "react-icons/fa";
 import { useMutation } from "react-query";
 
 const PromptWizardPanel = ({ onClose }: { onClose: () => void }) => {
-  const { query } = useRouter();
+  const { id } = useParams() as { id: string };
+
   const { promptInputRef, updatePromptWizardCredits, promptWizardCredits } =
     useProjectContext();
   const [keyword, setKeyword] = useState<string>("");
@@ -15,7 +16,7 @@ const PromptWizardPanel = ({ onClose }: { onClose: () => void }) => {
   const { mutate: createPrompt, isLoading: isLoadingPrompt } = useMutation(
     "create-prompt",
     (keyword: string) =>
-      axios.post(`/api/projects/${query.id}/prompter`, {
+      axios.post(`/api/projects/${id}/prompter`, {
         keyword,
       }),
     {
@@ -56,7 +57,7 @@ const PromptWizardPanel = ({ onClose }: { onClose: () => void }) => {
       />
       <Text textAlign="right" width="100%" mt={1} fontSize="sm">
         <b>{promptWizardCredits}</b> prompt assist
-        {promptWizardCredits && "s"} left
+        {promptWizardCredits > 1 ? "s" : ""} left
       </Text>
 
       <Button

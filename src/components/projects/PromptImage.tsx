@@ -23,12 +23,7 @@ import {
   ImageRestriction,
 } from "react-advanced-cropper";
 import { useDropzone } from "react-dropzone";
-import {
-  BsCloud,
-  BsCloudArrowDown,
-  BsCloudArrowUp,
-  BsImage,
-} from "react-icons/bs";
+import { BsCloudArrowUp, BsImage } from "react-icons/bs";
 import { FilePreview } from "../dashboard/Uploader";
 
 import "react-advanced-cropper/dist/style.css";
