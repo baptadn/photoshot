@@ -17,16 +17,18 @@ import {
 import { Shot } from "@prisma/client";
 import axios from "axios";
 import { formatRelative } from "date-fns";
-import { useRouter } from "next/router";
+import dynamic from "next/dynamic";
+import { useParams } from "next/navigation";
 import { memo, useState } from "react";
 import { BsHeart, BsHeartFill } from "react-icons/bs";
 import { HiDownload } from "react-icons/hi";
 import { IoMdCheckmarkCircleOutline } from "react-icons/io";
 import { MdOutlineModelTraining } from "react-icons/md";
 import { Ri4KFill } from "react-icons/ri";
-import { useMutation, useQuery } from "react-query";
-import ShotImage from "./ShotImage";
 import { TbFaceIdError } from "react-icons/tb";
+import { useMutation, useQuery } from "react-query";
+
+const ShotImage = dynamic(() => import("./ShotImage"));
 
 const getHdLabel = (shot: Shot, isHd: boolean) => {
   if (shot.hdStatus === "NO") {
@@ -52,7 +54,8 @@ const ShotCard = ({
   handleSeed: (shot: Shot) => void;
 }) => {
   const { onCopy, hasCopied } = useClipboard(initialShot.prompt);
-  const { query } = useRouter();
+  const { id: projectId } = useParams() as { id: string };
+
   const [shot, setShot] = useState(initialShot);
   const [isHd, setIsHd] = useState(Boolean(shot.hdOutputUrl));
 
@@ -60,7 +63,7 @@ const ShotCard = ({
     `update-shot-${initialShot.id}`,
     (bookmarked: boolean) =>
       axios.patch<{ shot: Shot }>(
-        `/api/projects/${query.id}/predictions/${initialShot.id}`,
+        `/api/projects/${projectId}/predictions/${initialShot.id}`,
         {
           bookmarked,
         }
@@ -76,7 +79,7 @@ const ShotCard = ({
     `create-hd-${initialShot.id}`,
     () =>
       axios.post<{ shot: Shot }>(
-        `/api/projects/${query.id}/predictions/${initialShot.id}/hd`
+        `/api/projects/${projectId}/predictions/${initialShot.id}/hd`
       ),
     {
       onSuccess: (response) => {
@@ -90,7 +93,7 @@ const ShotCard = ({
     () =>
       axios
         .get<{ shot: Shot }>(
-          `/api/projects/${query.id}/predictions/${initialShot.id}`
+          `/api/projects/${projectId}/predictions/${initialShot.id}`
         )
         .then((res) => res.data),
     {
@@ -109,7 +112,7 @@ const ShotCard = ({
     () =>
       axios
         .get<{ shot: Shot }>(
-          `/api/projects/${query.id}/predictions/${initialShot.id}/hd`
+          `/api/projects/${projectId}/predictions/${initialShot.id}/hd`
         )
         .then((res) => res.data),
     {

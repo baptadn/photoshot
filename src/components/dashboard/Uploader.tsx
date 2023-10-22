@@ -15,15 +15,15 @@ import {
   SimpleGrid,
   Spinner,
   Text,
-  useToast,
   VStack,
+  useToast,
 } from "@chakra-ui/react";
 import axios from "axios";
 import { useS3Upload } from "next-s3-upload";
 import { useState } from "react";
 import { useDropzone } from "react-dropzone";
-import { MdCheckCircle, MdCloud } from "react-icons/md";
 import { IoIosClose } from "react-icons/io";
+import { MdCheckCircle, MdCloud } from "react-icons/md";
 import { useMutation } from "react-query";
 import AvatarsPlaceholder from "../home/AvatarsPlaceholder";
 import { CheckedListItem } from "../home/Pricing";

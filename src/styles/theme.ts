@@ -1,4 +1,4 @@
-import { inter } from "@/pages/_app";
+import { inter } from "@/components/Providers";
 import { extendTheme } from "@chakra-ui/react";
 
 const theme = extendTheme({

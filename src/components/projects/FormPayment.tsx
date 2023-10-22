@@ -12,7 +12,7 @@ import {
 import { Project } from "@prisma/client";
 import axios from "axios";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { CheckedListItem } from "../home/Pricing";
@@ -25,12 +25,14 @@ const FormPayment = ({
   handlePaymentSuccess: () => void;
 }) => {
   const [waitingPayment, setWaitingPayment] = useState(false);
-  const { query } = useRouter();
+
+  const searchParams = useSearchParams();
+  const ppi = searchParams!.get("ppi");
+  const sessionId = searchParams!.get("session_id");
 
   useQuery(
     "check-payment",
-    () =>
-      axios.get(`/api/checkout/check/${query.ppi}/${query.session_id}/studio`),
+    () => axios.get(`/api/checkout/check/${ppi}/${sessionId}/studio`),
     {
       cacheTime: 0,
       refetchInterval: 10,
@@ -42,8 +44,8 @@ const FormPayment = ({
   );
 
   useEffect(() => {
-    setWaitingPayment(query.ppi === project.id);
-  }, [query, project]);
+    setWaitingPayment(ppi === project.id);
+  }, [ppi, project]);
 
   return (
     <Box textAlign="center" width="100%">

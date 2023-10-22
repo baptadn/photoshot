@@ -1,4 +1,6 @@
-import { IStudioPageProps } from "@/pages/studio/[id]";
+"use client";
+
+import { IStudioPageProps } from "@/components/pages/StudioPage";
 import { Shot } from "@prisma/client";
 import axios from "axios";
 import { createContext, ReactNode, RefObject, useRef, useState } from "react";
