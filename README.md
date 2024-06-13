@@ -2,12 +2,16 @@
 
 [![Twitter](https://img.shields.io/twitter/url/https/twitter.com/photoshot_ai.svg?style=social&label=Follow%20%40photoshot_ai)](https://twitter.com/photoshot_ai)
 
+[![photobooth-ai.app](https://github.com/baptadn/photoshot/assets/1102595/3636614d-67f3-45a8-8c11-4b9271540725)](https://photobooth-ai.app/)
+
 An open-source AI avatar generator web app
 
 [![Photoshot](https://photoshot.app/og-cover.jpg)
 ](https://user-images.githubusercontent.com/1102595/206658000-d349ef06-e4f2-4626-9deb-6c8a246f7553.mp4)
 
 Try it out at [photoshot.app](https://photoshot.app)
+
+
 
 ## Stack
 
