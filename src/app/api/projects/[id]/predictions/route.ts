@@ -1,7 +1,9 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import replicateClient from "@/core/clients/replicate";
+import openai from "@/core/clients/openai";
+import { replicate } from "@/core/clients/replicate";
 import db from "@/core/db";
 import { replacePromptToken } from "@/core/utils/predictions";
+import { prompts } from "@/core/utils/prompts";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 
@@ -27,25 +29,46 @@ export async function POST(
     return NextResponse.json({ message: "No credit" }, { status: 400 });
   }
 
-  const { data } = await replicateClient.post(
-    `https://api.replicate.com/v1/predictions`,
-    {
-      input: {
-        prompt: replacePromptToken(prompt, project),
-        negative_prompt:
-          process.env.REPLICATE_NEGATIVE_PROMPT ||
-          "cropped face, cover face, cover visage, mutated hands",
-        ...(image && { image }),
-        ...(seed && { seed }),
-      },
-      version: project.modelVersionId,
-    }
-  );
+  const instruction = `${process.env.OPENAI_API_SEED_PROMPT}
+
+${prompts.slice(0, 5).map(
+  (style) => `${style.label}: ${style.prompt}
+
+`
+)}
+
+Keyword: ${prompt}
+`;
+
+  const chatCompletion = await openai.chat.completions.create({
+    messages: [{ role: "user", content: instruction }],
+    model: "gpt-4-turbo",
+    temperature: 0.5,
+    max_tokens: 200,
+  });
+
+  let refinedPrompt = chatCompletion.choices?.[0]?.message?.content?.trim();
+
+  const prediction = await replicate.predictions.create({
+    model: `${process.env.REPLICATE_USERNAME}/${project.id}`,
+    version: project.modelVersionId!,
+    input: {
+      prompt: `${replacePromptToken(
+        `${refinedPrompt}. This a portrait of ${project.instanceName} @me and not another person.`,
+        project
+      )}`,
+      negative_prompt:
+        process.env.REPLICATE_NEGATIVE_PROMPT ||
+        "cropped face, cover face, cover visage, mutated hands",
+      ...(image && { image }),
+      ...(seed && { seed }),
+    },
+  });
 
   const shot = await db.shot.create({
     data: {
       prompt,
-      replicateId: data.id,
+      replicateId: prediction.id,
       status: "starting",
       projectId: project.id,
     },

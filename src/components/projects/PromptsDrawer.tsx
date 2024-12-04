@@ -17,7 +17,6 @@ import {
 } from "@chakra-ui/react";
 import Image from "next/image";
 import { FaMagic } from "react-icons/fa";
-import PromptWizardPanel from "./PromptWizardPanel";
 
 const PromptsDrawer = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -50,9 +49,8 @@ const PromptsDrawer = () => {
               divider={<Divider />}
               spacing={6}
             >
-              <PromptWizardPanel onClose={onClose} />
               <Box>
-                <Text mb={4}>Or select a preset:</Text>
+                <Text mb={4}>Select a preset</Text>
                 <SimpleGrid columns={{ base: 2, md: 3 }} gap={4}>
                   {prompts.map((prompt) => (
                     <Box
@@ -63,7 +61,7 @@ const PromptsDrawer = () => {
                     >
                       <Image
                         onClick={() => {
-                          promptInputRef.current!.value = prompt.prompt;
+                          promptInputRef.current!.value = prompt.label;
                           onClose();
                         }}
                         style={{ borderRadius: 10 }}

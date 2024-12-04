@@ -21,7 +21,7 @@ export const ProjectContext = createContext<{
   shotTemplate: Shot | undefined;
   updateShotTemplate: (shot: Shot | undefined) => void;
   fetchShots: () => void;
-  promptInputRef: RefObject<HTMLTextAreaElement>;
+  promptInputRef: RefObject<HTMLInputElement>;
   promptImageUrl: string | undefined;
   setPromptImageUrl: (promptImage: string | undefined) => void;
 }>(null!);
@@ -33,7 +33,7 @@ export const ProjectProvider = ({
   children: ReactNode;
   project: IStudioPageProps["project"];
 }) => {
-  const promptInputRef = useRef<HTMLTextAreaElement>(null);
+  const promptInputRef = useRef<HTMLInputElement>(null);
   const [shots, setShots] = useState(project.shots);
   const [shotTemplate, setShotTemplate] = useState<Shot>();
   const [promptImageUrl, setPromptImageUrl] = useState<string>();

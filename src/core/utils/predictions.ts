@@ -21,7 +21,7 @@ export const extractSeedFromLogs = (logsContent: string) => {
 export const replacePromptToken = (prompt: string, project: Project) => {
   const refinedPrompt = prompt.replaceAll(
     "@me",
-    `${project.instanceName} ${getRefinedInstanceClass(project.instanceClass)}`
+    `${project.instanceName} ${project.instanceClass}`
   );
 
   return refinedPrompt;

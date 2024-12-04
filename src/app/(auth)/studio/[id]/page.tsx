@@ -1,5 +1,4 @@
 import StudioPage from "@/components/pages/StudioPage";
-import replicateClient from "@/core/clients/replicate";
 import db from "@/core/db";
 import { getCurrentSessionRedirect } from "@/lib/sessions";
 import { Metadata } from "next";
@@ -38,20 +37,7 @@ const Studio = async ({ params }: { params: { id: string } }) => {
     notFound();
   }
 
-  const { data: model } = await replicateClient.get(
-    `https://api.replicate.com/v1/models/${process.env.REPLICATE_USERNAME}/${project.id}/versions/${project.modelVersionId}`
-  );
-
-  const hasImageInputAvailable = Boolean(
-    model.openapi_schema?.components?.schemas?.Input?.properties?.image?.title
-  );
-
-  return (
-    <StudioPage
-      project={project}
-      hasImageInputAvailable={hasImageInputAvailable}
-    />
-  );
+  return <StudioPage project={project} />;
 };
 
 export default Studio;

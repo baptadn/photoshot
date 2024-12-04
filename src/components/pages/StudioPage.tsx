@@ -18,7 +18,7 @@ export interface IStudioPageProps {
   hasImageInputAvailable: boolean;
 }
 
-const StudioPage = ({ project, hasImageInputAvailable }: IStudioPageProps) => (
+const StudioPage = ({ project }: IStudioPageProps) => (
   <ProjectProvider project={project}>
     <PageContainer>
       <Box mb={4}>
@@ -32,7 +32,7 @@ const StudioPage = ({ project, hasImageInputAvailable }: IStudioPageProps) => (
           Back to Dashboard
         </Button>
       </Box>
-      <PromptPanel hasImageInputAvailable={hasImageInputAvailable} />
+      <PromptPanel />
       <ShotsList />
     </PageContainer>
   </ProjectProvider>

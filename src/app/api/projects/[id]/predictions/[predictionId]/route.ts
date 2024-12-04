@@ -1,5 +1,5 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import replicateClient from "@/core/clients/replicate";
+import { replicate } from "@/core/clients/replicate";
 import db from "@/core/db";
 import { extractSeedFromLogs } from "@/core/utils/predictions";
 import { getServerSession } from "next-auth";
@@ -27,9 +27,7 @@ export async function GET(
     where: { projectId: project.id, id: predictionId },
   });
 
-  const { data: prediction } = await replicateClient.get(
-    `https://api.replicate.com/v1/predictions/${shot.replicateId}`
-  );
+  const prediction = await replicate.predictions.get(shot.replicateId);
 
   const outputUrl = prediction.output?.[0];
   let blurhash = null;
@@ -39,7 +37,7 @@ export async function GET(
     blurhash = base64;
   }
 
-  const seedNumber = extractSeedFromLogs(prediction.logs);
+  const seedNumber = extractSeedFromLogs(prediction.logs!);
 
   shot = await db.shot.update({
     where: { id: shot.id },

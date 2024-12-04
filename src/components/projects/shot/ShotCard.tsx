@@ -23,7 +23,6 @@ import { memo, useState } from "react";
 import { BsHeart, BsHeartFill } from "react-icons/bs";
 import { HiDownload } from "react-icons/hi";
 import { IoMdCheckmarkCircleOutline } from "react-icons/io";
-import { MdOutlineModelTraining } from "react-icons/md";
 import { Ri4KFill } from "react-icons/ri";
 import { TbFaceIdError } from "react-icons/tb";
 import { useMutation, useQuery } from "react-query";
@@ -163,25 +162,6 @@ const ShotCard = ({
       <Flex position="relative" p={3} flexDirection="column">
         <Flex alignItems="center" justifyContent="flex-end">
           <Box>
-            {shot.seed && shot.outputUrl && (
-              <Tooltip hasArrow label="Re-use style">
-                <IconButton
-                  size="sm"
-                  onClick={() => {
-                    handleSeed(shot);
-                    window.scrollTo({
-                      top: 0,
-                      left: 0,
-                      behavior: "smooth",
-                    });
-                  }}
-                  variant="ghost"
-                  aria-label="Download"
-                  fontSize="md"
-                  icon={<MdOutlineModelTraining />}
-                />
-              </Tooltip>
-            )}
             {shot.outputUrl && (
               <>
                 <IconButton

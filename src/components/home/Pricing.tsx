@@ -1,4 +1,4 @@
-import React from "react";
+import { formatStudioPrice } from "@/core/utils/prices";
 import {
   Box,
   List,
@@ -8,8 +8,8 @@ import {
   Tag,
   Text,
 } from "@chakra-ui/react";
+import React from "react";
 import { HiBadgeCheck } from "react-icons/hi";
-import { formatStudioPrice } from "@/core/utils/prices";
 
 export const CheckedListItem = ({
   children,
@@ -77,9 +77,7 @@ const Pricing = () => {
             <b>{process.env.NEXT_PUBLIC_STUDIO_SHOT_AMOUNT}</b> avatars 4K
             generation
           </CheckedListItem>
-          <CheckedListItem>
-            <b>30</b> AI prompt assists
-          </CheckedListItem>
+          <CheckedListItem>AI prompt refinement</CheckedListItem>
           <CheckedListItem>Craft your own prompt</CheckedListItem>
           <CheckedListItem>Sponsorship development 🖤</CheckedListItem>
         </List>

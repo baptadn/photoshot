@@ -81,9 +81,7 @@ const FormPayment = ({
               <b>{process.env.NEXT_PUBLIC_STUDIO_SHOT_AMOUNT}</b> avatars 4K
               generation
             </CheckedListItem>
-            <CheckedListItem>
-              <b>30</b> AI prompt assists
-            </CheckedListItem>
+            <CheckedListItem>AI prompt refinement</CheckedListItem>
             <CheckedListItem>
               Your Studio will be deleted 24 hours after your credits are
               exhausted
