@@ -15,7 +15,6 @@ export type ProjectWithShots = Project & {
 
 export interface IStudioPageProps {
   project: ProjectWithShots & { _count: { shots: number } };
-  hasImageInputAvailable: boolean;
 }
 
 const StudioPage = ({ project }: IStudioPageProps) => (
