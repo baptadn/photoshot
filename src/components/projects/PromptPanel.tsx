@@ -7,8 +7,8 @@ import {
   Flex,
   HStack,
   Icon,
+  Input,
   Text,
-  Textarea,
   VStack,
 } from "@chakra-ui/react";
 import { Project, Shot } from "@prisma/client";
@@ -18,13 +18,8 @@ import { BsLightbulb } from "react-icons/bs";
 import { FaCameraRetro } from "react-icons/fa";
 import { useMutation } from "react-query";
 import PromptsDrawer from "./PromptsDrawer";
-import PromptImage from "./PromptImage";
 
-const PromptPanel = ({
-  hasImageInputAvailable,
-}: {
-  hasImageInputAvailable: Boolean;
-}) => {
+const PromptPanel = () => {
   const {
     project,
     shotCredits,
@@ -86,7 +81,6 @@ const PromptPanel = ({
       </Flex>
       <HStack mt={2}>
         <PromptsDrawer />
-        {hasImageInputAvailable && <PromptImage />}
       </HStack>
       <Flex
         flexDirection={{ base: "column", md: "row" }}
@@ -95,18 +89,17 @@ const PromptPanel = ({
         width="100%"
       >
         <Box flex="1">
-          <Textarea
+          <Input
             size="lg"
+            placeholder="Who do you want to be?"
             disabled={shotCredits === 0}
             ref={promptInputRef}
             backgroundColor="white"
             isRequired
             shadow="lg"
-            height="7rem"
             focusBorderColor="gray.400"
             _focus={{ shadow: "md" }}
             mr={2}
-            placeholder="a portrait of @me as an astronaut, highly-detailed, trending on artstation"
           />
         </Box>
       </Flex>
@@ -187,8 +180,9 @@ const PromptPanel = ({
           <Box flex="1">
             <VStack alignItems="flex-start">
               <Text color="beige.500" fontSize="sm">
-                <Icon as={BsLightbulb} /> Use <b>@me</b> as the subject of your
-                prompt
+                <Icon as={BsLightbulb} /> Add simple keywords like{" "}
+                <b>a viking, a astronaut, a ski monitor</b>... And we will do
+                the rest!
               </Text>
             </VStack>
           </Box>

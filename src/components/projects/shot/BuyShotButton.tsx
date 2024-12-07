@@ -85,7 +85,6 @@ const BuyShotButton = ({
           }}
         >
           <b>100 shots</b>
-          <Text fontSize="xs">+20 prompt assists</Text>
         </MenuItem>
         <MenuItem
           command="$7"
@@ -94,7 +93,6 @@ const BuyShotButton = ({
           }}
         >
           <b>200 shots</b>
-          <Text fontSize="xs">+40 prompt assists</Text>
         </MenuItem>
         <MenuItem
           command="$9"
@@ -103,7 +101,6 @@ const BuyShotButton = ({
           }}
         >
           <b>300 shots</b>
-          <Text fontSize="xs">+60 prompt assists</Text>
         </MenuItem>
       </MenuList>
     </Menu>

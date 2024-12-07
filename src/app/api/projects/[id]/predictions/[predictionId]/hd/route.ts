@@ -1,5 +1,5 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import replicateClient from "@/core/clients/replicate";
+import { replicate } from "@/core/clients/replicate";
 import db from "@/core/db";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
@@ -32,9 +32,7 @@ export async function GET(
     );
   }
 
-  const { data: prediction } = await replicateClient.get(
-    `https://api.replicate.com/v1/predictions/${shot.hdPredictionId}`
-  );
+  const prediction = await replicate.predictions.get(shot.hdPredictionId!);
 
   if (prediction.output) {
     shot = await db.shot.update({
@@ -77,22 +75,19 @@ export async function POST(
     );
   }
 
-  const { data } = await replicateClient.post(
-    `https://api.replicate.com/v1/predictions`,
-    {
-      input: {
-        image: shot.outputUrl,
-        upscale: 8,
-        face_upsample: true,
-        codeformer_fidelity: 1,
-      },
-      version: process.env.REPLICATE_HD_VERSION_MODEL_ID,
-    }
-  );
+  const prediction = await replicate.predictions.create({
+    version: process.env.REPLICATE_HD_VERSION_MODEL_ID!,
+    input: {
+      image: shot.outputUrl,
+      upscale: 8,
+      face_upsample: true,
+      codeformer_fidelity: 1,
+    },
+  });
 
   shot = await db.shot.update({
     where: { id: shot.id },
-    data: { hdStatus: "PENDING", hdPredictionId: data.id },
+    data: { hdStatus: "PENDING", hdPredictionId: prediction.id },
   });
 
   return NextResponse.json({ shot });

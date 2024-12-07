@@ -1,6 +1,7 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import openai from "@/core/clients/openai";
 import db from "@/core/db";
+import { prompts } from "@/core/utils/prompts";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 
@@ -30,17 +31,24 @@ export async function POST(
   }
 
   try {
-    const completion = await openai.createCompletion({
-      model: "text-davinci-003",
-      temperature: 0.7,
-      max_tokens: 256,
-      top_p: 1,
-      prompt: `${process.env.OPENAI_API_SEED_PROMPT}
+    const instruction = `${process.env.OPENAI_API_SEED_PROMPT}
 
-${keyword}:`,
+${prompts.map(
+  (style) => `${style.label}: ${style.prompt}
+
+`
+)}
+
+Keyword: ${keyword}
+`;
+
+    const chatCompletion = await openai.chat.completions.create({
+      messages: [{ role: "user", content: instruction }],
+      model: "gpt-4",
+      temperature: 0.5,
     });
 
-    const prompt = completion.data.choices?.[0].text!.trim();
+    const prompt = chatCompletion.choices?.[0]?.message?.content?.trim();
 
     if (prompt) {
       project = await db.project.update({
@@ -56,6 +64,7 @@ ${keyword}:`,
       promptWizardCredits: project.promptWizardCredits,
     });
   } catch (e) {
+    console.log({ e });
     return NextResponse.json({ success: false }, { status: 400 });
   }
 }

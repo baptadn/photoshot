@@ -4,8 +4,8 @@ import JSZip from "jszip";
 import sharp from "sharp";
 import smartcrop from "smartcrop-sharp";
 
-const WIDTH = 512;
-const HEIGHT = 512;
+const WIDTH = 1024;
+const HEIGHT = 1024;
 
 export const createZipFolder = async (urls: string[], project: Project) => {
   const zip = new JSZip();

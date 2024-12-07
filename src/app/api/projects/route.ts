@@ -1,4 +1,4 @@
-import replicateClient from "@/core/clients/replicate";
+import { replicate } from "@/core/clients/replicate";
 import s3Client from "@/core/clients/s3";
 import db from "@/core/db";
 import { createZipFolder } from "@/core/utils/assets";
@@ -22,14 +22,23 @@ export async function GET() {
 
   for (const project of projects) {
     if (project?.replicateModelId && project?.modelStatus !== "succeeded") {
-      const { data } = await replicateClient.get(
-        `/v1/trainings/${project.replicateModelId}`
-      );
+      try {
+        const training = await replicate.trainings.get(
+          project.replicateModelId
+        );
 
-      await db.project.update({
-        where: { id: project.id },
-        data: { modelVersionId: data.version, modelStatus: data?.status },
-      });
+        const version = training?.output?.version?.split?.(":")?.[1];
+
+        await db.project.update({
+          where: { id: project.id },
+          data: {
+            modelVersionId: version,
+            modelStatus: training?.status,
+          },
+        });
+      } catch (error) {
+        console.log({ error });
+      }
     }
   }
 
@@ -55,6 +64,7 @@ export async function POST(request: Request) {
       instanceClass: instanceClass || "person",
       instanceName: process.env.NEXT_PUBLIC_REPLICATE_INSTANCE_TOKEN!,
       credits: Number(process.env.NEXT_PUBLIC_STUDIO_SHOT_AMOUNT) || 50,
+      version: "V2",
     },
   });
 

@@ -84,6 +84,7 @@ model Project {
   credits             Int       @default(100)
   promptWizardCredits Int       @default(20)
   Payment             Payment[]
+  version             ProjectVersion @default(V1)
 }
 
 model Shot {
@@ -114,4 +115,9 @@ model Payment {
   projectId String?
 
   @@map("payments")
+}
+
+enum ProjectVersion {
+  V1
+  V2
 }
